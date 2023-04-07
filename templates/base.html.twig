@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}mvc{% endblock %}</title>
+    <link rel="icon" href="{{ asset('img/glider.svg') }}">
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+{% endblock %}
+</head>
+<body>
+    <header class="site-header" style="background-image: url({{ asset('img/hot-air-balloon_1920x500.jpg') }})">
+        <span class="site-title">Min Symfony Site</span>
+        <nav>
+            <ul>
+                <li><a href="{{ path('me') }}">Jag</a></li>
+                <li><a href="{{ path('lucky') }}">Lucky</a></li>
+                <li><a href="{{ path('report') }}">Rapport</a></li>
+                <li><a href="{{ path('about') }}">Om</a></li>
+                <li><a href="{{ path('api_quote') }}">Quote (API)</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+{% block body %}{% endblock %}
+    </main>
+    <footer>
+{% block footer %}
+        <div class="logos">
+            <a href="https://symfony.com">
+                <img src="{{ asset('img/symfony_black_logo.png') }}" alt="Symfony logo" width="32">
+            </a>
+            <a href="https://github.com/jonasbth/mvc">
+                <img src="{{ asset('img/github-mark.svg') }}" alt="GitHub logo" width="32">
+            </a>
+        </div>
+        <span class="copy">&copy; 2023 Jonas B</span>
+{% endblock %}
+    </footer>
+</body>
+</html>

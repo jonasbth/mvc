@@ -1,0 +1,34 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Om kursen | mvc{% endblock %}
+
+{% block body %}
+    <div class="flex-container">
+        <article>
+            <h1>Om kursen mvc (v2)</h1>
+
+            <img src="{{ asset('img/symfony.png') }}" alt="Symfony logotyp" width="200">
+
+            <p>Kursen <a href="https://dbwebb.se/kurser/mvc-v2">Objektorienterade webbteknologier</a> ("mvc"), fokuserar på objektorienterade
+               programmeringstekniker i PHP tillsammans med databaser samt enhetstestning. Allt sker inom ramen för ett webbaserat ramverk
+               kallat <a href="https://symfony.com">Symfony</a>.</p>
+
+            <p>Ett centralt begrepp i kursen är designmönstret Model View Controller (MVC), som implementeras med hjälp av Symfony. Med model
+               avses applikationens datamodell med logik och regler, som ofta hanteras med hjälp av en databas. View syftar på presentationen
+               av applikationens data, som hanteras med hjälp av HTML och en template-motor kallad Twig, som finns tillgänglig i Symfony.
+               Slutligen med controller i MVC avses hanteringen av inkommande förfrågningar till applikationen. I vårt fall handlar det om
+               webb-requests, som tas om hand genom att definera "routes" med hjälp av klasser. I routsen hanteras requesten med hjälp av
+               applikationens modell och vyer.</p>
+        </article>
+        <aside>
+            <h3>Webbplatsrepo</h3>
+
+            <p>Webbplatsen har ett <a href="https://github.com/jonasbth/mvc">repo (repository) på GitHub</a> där källkoden finns tillgänglig.</p>
+
+            <h3>Kursrepo</h3>
+
+            <p>Kursen har ett <a href="https://github.com/dbwebb-se/mvc">kursrepo på GitHub</a> med exempel och "issues" där man kan
+               ställa frågor och påpeka fel och brister.</p>
+        </aside>
+    </div>
+{% endblock %}

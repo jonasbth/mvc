@@ -1,0 +1,18 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Lucky | mvc{% endblock %}
+
+{% block body %}
+    <article class="no-flex">
+        <h1>Tärningsspel - Slå en 6:a</h1>
+        <img src="{{ asset('img/' ~ image) }}" alt="Die {{ number }}" width="100">
+
+{% if number == 6 %}
+        <p>Grattis du vann!</p>
+        <p><img src="{{ asset('img/partying-face.gif') }}" alt="Partying face" width="120"></p>
+{% else %}
+        <p>Bättre lycka nästa gång.</p>
+{% endif %}
+        <p><a href="{{ path('lucky') }}">Prova igen</a>.</p>
+    </article>
+{% endblock %}
