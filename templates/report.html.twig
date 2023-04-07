@@ -19,11 +19,45 @@
 
         <section>
             <h2 id="kmom01">Kmom01</h2>
-            <p>Kursmoment ett.</p>
+            <p>Då är vi igång med en ny kurs, Objektorienterade webbteknologier, eller mvc i dagligt tal. Jag har sysslat en del med objektorienterad
+               programmering innan jag började på BTH. När jag började på ett konsultbolag i början av 2000-talet, så gick jag några kurser i
+               objektorientering och C++ hos Learning Tree, ett bolag som fortfarande är verksamt konstaterade jag precis. Nu hittar jag bara att de
+               har en introduktionskurs till C++. När jag gick deras kurser så fanns det flera och mer avancerade C++-kurser.</p>
 
-            <p></p>
+            <p>Under min tid på ett konsultbolag var jag inblandad i ett par större projekt där objektorienterad C++ användes. Nu senast läste jag
+               också en kurs i objektorienterad Python på BTH. Just i PHP, som används i denna kurs, har jag dock inte använt objektorientering.</p>
 
-            <p></p>
+            <p>För att prata lite om hur objektorienterad programmering ser ut i PHP, så liknar den nog mer den traditionella modellen som den ser
+               ut i C++, än som den ser ut i Python, där det till exempel inte går att göra medlemsvariabler privata, utan det kan bara ske genom
+               en konvention hur man namnger en variabel. I PHP använder man det reserverade ordet <code>class</code> för att definera klassens
+               egenskaper (properties) och metoder. Inuti en metod kan man använda namnet <code>$this</code> för att referera till det egna objektet.
+               För att referera till en statisk (klass-) variabel, så använder man istället <code>self::</code> framför variabelnamnet.</p>
+
+            <p>En konstruktor är en funktion som anropas då ett objekt instantieras. I PHP namnger man konstruktorn med <code>__construct()</code>.
+               För att instantiera ett objekt av en klass använder man som i de flesta andra språk nyckelordet <code>new</code>. Man kan se en
+               klass som en definition av en komplex datatyp som både innehåller en beskrivning av ett tillstånd genom medlemsvariabler och funktioner
+               genom s.k. metoder. Klassen används som en mall när man instantierar objekt av klassen. Ett viktigt begrepp inom objektorientering är
+               inkapsling (encapsulation), som syftar på att objekt har egenskaper (tillstånd) och egna metoder som kan operera dessa, och egenskaperna
+               kan göras privata, så att de inte kan modifieras utanför objekten.</p>
+
+            <p>Största arbetet med kursmomentet var att komma igång med PHP-ramverket Symfony och skapa och designa en mindre webbplats med hjälp
+               av detta. En fördel med Symfony är att det är enkelt att definiera "routes" till webbplatsen, där man kopplar ihop en sökväg (URL)
+               med en templatefil som renderar webbsidan. I Symfony används Twig som templatemotor, vilket även används i det lilla ramverket
+               Pico, som vi använde i designkursen. Vi gjorde även en liten API-metod, som returnerade ett JSON-svar, här användes dock inte Twig.</p>
+
+            <p>För att packa ihop och komprimera CSS-filer och JavaScript installerade vi Encore, som är en paketering (wrapping) av Webpack,
+               gjord av Symfony, för att förenkla hanteringen av Webpack. En reflektion är att Symfony är ett tämligen stort och lite tungt
+               ramverk. Komprimeringen av CSS och JavaScript tar några sekunder, som dock bara behöver göras när man ändrat i någon resursfil, och
+               det är en märkbar fördröjning på någon sekund när en ocachad webbsida laddas. Tittar man i var/cache/ ser man att det är några
+               tusen cachade filer bara för vår lilla webbplats.</p>
+
+            <p>Slutligen skall vi lyfta fram några delar av artikeln <a href="https://phptherightway.com/">PHP The Right Way</a>. Känslan är att
+               artikeln tar upp mycket som vi redan stött på i denna kurs och i tidigare kurserna Webtec och Design. Det verkar vara en bra källa,
+               som innehåller mycket länkar till användbara resurser inom PHP. Saker som vi inte ännu berört så mycket är SPL (Standard PHP
+               Library), säkerhet, virtualisering, caching och dokumentation. I JavaScript-kursen använde vi JSDoc för dokumentation, en gissning
+               är att PHPDoc fungerar på liknande sätt.</p>
+
+            <p>TIL för detta kursmoment är introduktionen till ramverket Symfony.</p>
 
         </section>
 

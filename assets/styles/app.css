@@ -91,9 +91,8 @@ main h1 {
 }
 
 main h2 {
-/*    border-bottom: 1px solid;*/
     font-size: 1.8rem;
-    margin: 0 0 0.6em;
+    margin: 0.8em 0 0.6em;
 }
 
 main p {
