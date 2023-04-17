@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class QuoteControllerJson
 {
-    static $quotes = [
+    public static $quotes = [
         "There is no place like 127.0.0.1",
         "There are only 10 kinds of people in this world: those who know binary and those who don’t.",
         "A programmers’s favourite hangout place: Foo Bar.",
@@ -41,7 +41,7 @@ class QuoteControllerJson
 
         $encOptions = $response->getEncodingOptions() | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE;
         $encOptions = $encOptions ^ JSON_HEX_APOS; // Don't escape "'"
-        
+
         $response->setEncodingOptions($encOptions);
         return $response;
     }

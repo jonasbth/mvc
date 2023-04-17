@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ReportControllerTwig extends AbstractController
 {
-    static $dieMap = [
+    public static $dieMap = [
         1 => "one",
         2 => "two",
         3 => "three",
