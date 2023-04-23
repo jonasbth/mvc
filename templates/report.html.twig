@@ -63,9 +63,63 @@
 
         <section>
             <h2 id="kmom02">Kmom02</h2>
-            <p></p>
+            <p>I kursmoment 2 fortsätter vi med objektorientering i PHP och Symfony, och skapar modellklasser för en kortlek.</p>
 
-            <p></p>
+            <p>Inom objektorientering
+               finns det konstruktioner som arv, komposition, interface och trait. Arv kännetecknas av att det finns en basklass (även kallad
+               förälderklass eller superklass), och subklasser ("barnklasser") som specialiserar eller utökar funktionen hos basklassen. En
+               arvskonstruktion kan vara lämplig att använda när man kan formulera en relation mellan klasser med hjälp av uttrycket "a är en b",
+               t ex "en Volvo är en bil", där då "bil" representerar en basklass och "Volvo" en subklass. I PHP använder man nyckelordet "extends"
+               för att skapa ett arv mellan klasser.</p>
+
+            <p>En annan konstruktion är komposition, som innebär att en klass har en annan klass som attribut. Det vill säga en klass äger, har eller
+               består av en eller flera andra klasser. Det finns några olika grader av komposition: En svagare typ kallar man för aggregation,
+               som innebär att objekt som finns inuti ett annat objekt kan existera utanför det inneslutande objektet. Med ren komposition menar
+               man att objekt som är inneslutna i ett annat inte kan existera självständigt. Exempel på det senare skulle kunna vara rum i ett
+               hus, som inte kan existera utan huset. I vårat fall med kort i en kortlek, så handlar förhållandet mellan klasserna snarast om
+               aggregation: Ett spelkort kan ha ett liv utanför kortleken, till exempel i en korthand.</p>
+
+            <p>Enligt regelboken är komposition är att föredra om både arv och komposition är möjliga konstruktioner. Det leder till flexiblare och
+               "snyggare" kod. Av egen erfarenhet vet jag att djupa arvshierarkier leder till kod som är svår att underhålla, och hitta fel i.</p>
+
+            <p>Ett interface anger en uppsättning metoder som en klass som implementerar interfacet lovar att uppfylla. Ett interface kan ses som
+               ett kontrakt, det innehåller metodnamn och parametrar, men ingen implementation. En variant på interface är en abstrakt basklass,
+               som inte heller kan instantieras, men som kan ha vissa metoder implementerade och även ha attribut.</p>
+
+            <p>Slutligen med konstruktionen trait kan man skapa återanvändbar kod som löser ett specifikt problem. En trait ser ut som en klass
+               men kan inte instantieras. För att använda en trait i en klass, så använder man nyckelordet "use" följt av namnet på traiten.</p>
+
+            <p>Nu ska vi prata om den egna implementation av uppgiften i kursmomentet. Jag har beskrivit klasserna, med ett klassdiagram på
+               <a href="{{ path('card_index') }}">landningssidan för kortleken</a>. Jag är nöjd med hur jag skapade en abstrakt basklass för
+               spelkorten, och specialiseringen i subklasser för de olika kortfärgerna eller sviterna. Extra nöjd är jag nog med metoden
+               <code>getSuit()</code>, som jag implementerade i basklassen, och som returnerar det egna kortets färg med hjälp av klassnamnet.
+               Det kan vara ett exempel på så kallad polymorfism, som är egenskap av arv i objektorientering, och som innebär att en metod
+               kan bete sig olika beroende av den konkreta typen av objektet.</p>
+
+            <p>Även metoden <code>getHTMLEntity()</code>, som jag specialiserade i subklasserna är ett uttryck av polymorfism. Den metoden
+               returnerar en HTML-entitet, som ger en enkel grafisk beskrivning av ett kort. Jag gillar att det är ett resurssnålt sätt att
+               beskriva ett kort och att det använder en "native" webbteknologi. Användarna av webbsidorna är kanske mindre imponerade.</p>
+
+            <p>För klasserna <code>CardDeck</code> och <code>CardHand</code> är jag nöjd med att jag implementerade interface:en
+               <code>Iterator</code> och <code>Countable</code>, vilket gör det enkelt att iterera över korten både i PHP och i Twig-filerna.
+               Lite mindre nöjd är jag kanske över att jag implementerade metoden <code>shuffle()</code> själv, trots att det finns en
+               inbyggd funktion shuffle i PHP, vilket jag upptäckte senare. Men det gav i alla fall lite extra träning.</p>
+
+            <p>En kort kommentar om att jag i <code>CardHand</code>-klassen använder "dependency injection", dvs. jag "skapar" korten utanför
+               korthanden och skickar in dem i konstruktorn. Däremot i <code>CardDeck</code>, så skapar klassen sina egna kort med hjälp av
+               <code>reset()</code>-metoden. Dock har jag några klasskonstanter som beskriver korten, och gör det lite mera flexibelt.</p>
+
+            <p>Slutligen en kommentar om JSON API:et: Vi skulle skapa POST-router för ett antal förfrågningar, där jag tycker att GET vore mera logiskt,
+               eftersom vi egentligen inte skickar någon data till routen. Därför tillåter jag både GET- och POST-anrop till de aktuella
+               routerna och hoppas att det är acceptabelt.</p>
+
+            <p>Nu har jag gått över 30 meningar, så det får bli en kort reflektion om att arbeta med Symfony och MVC. Jag är inte speciellt
+               road av att jobba med ett "gigantiskt" ramverk som Symfony. Dokumentationen är dessutom ofullständig, så man får söka svar i
+               källkoden om det är något lite udda man undrar över. En fördel med ramverket är att det är lätt att skapa "routes" till
+               applikationen, och Twig är också trevligt att jobba med. Men applikationen känns tung, och man har liten koll på vad som
+               egentligen händer bakom kulisserna. Men det är ju alltid en erfarenhet.</p>
+
+            <p>TIL för detta kursmoment är implementeringen av interface:en <code>Iterator</code> och <code>Countable</code>.</p>
 
             <p></p>
 

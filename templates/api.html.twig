@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+
+{% block title %}JSON API | mvc{% endblock %}
+
+{% block body %}
+    <article class="no-flex">
+        <h1>JSON API</h1>
+
+        <p>Följande tjänster är tillgängliga:</p>
+
+        <ul>
+            <li><a href="{{ path('api_quote') }}">Dagens datum och citat/skämt (GET)</a>.</li>
+            <li><a href="{{ path('api_deck') }}">En sorterad kortlek (GET)</a>.</li>
+            <li><a href="{{ path('api_deck_shuffle') }}">En blandad kortlek (GET, POST)</a>.</li>
+            <li><a href="{{ path('api_deck_draw') }}">Dra ett kort (GET, POST)</a>.</li>
+            <li><a href="{{ path('api_deck_draw', {num: 5}) }}">Dra fem kort (ett ex.) (GET, POST)</a>.</li>
+            <li><a href="{{ path('api_deck_deal', {players: 2, num: 5}) }}">Dela fem kort till två spelare (ett ex.) (GET, POST)</a>.</li>
+        </ul>
+
+        <p>För att skapa en ny kortlek som sparas i sessionen, besök en sorterad eller en blandad kortlek.</p>
+
+    </article>
+{% endblock %}

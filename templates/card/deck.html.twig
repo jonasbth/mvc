@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Kortlek | mvc{% endblock %}
+
+{% block body %}
+    <article class="no-flex">
+        <h1>En {{ shuffleText }} kortlek</h1>
+
+            <div class="cardContainer">
+{% for card in deck %}
+<span class="card {{ card.getSuit() }}">{{ card.getHTMLEntity() | raw }}</span>
+{% endfor %}
+            </div>
+
+    </article>
+{% endblock %}

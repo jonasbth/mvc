@@ -1,0 +1,29 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Kortlek | mvc{% endblock %}
+
+{% block body %}
+    <article class="no-flex">
+{% if cardHand is empty %}
+        <h1>Inga dragna kort</h1>
+{% else %}
+        <h1>Drag{{ cardHand|length == 1 ? 'et' : 'na'}} kort</h1>
+
+        <div class="cardContainer">
+    {%~ for card in cardHand %}
+    <span class="card {{ card.getSuit() }}">{{ card.getHTMLEntity() | raw }}</span>
+    {%~ endfor %}
+        </div>
+{% endif %}
+
+        <p>Antal kort kvar: {{ count }}</p>
+
+{% if count > 0 %}
+        <p><a href="{{ path('card_deck_draw') }}">Dra ett till</a>.</p>
+        <p><a href="{{ path('card_deck_draw', {num: 5}) }}">Dra {{ count < 5 ? 'upp till ' }}fem till</a>.</p>
+{% endif %}
+{% if count > 5 %}
+        <p><a href="{{ path('card_deck_draw', {num: 13}) }}">Dra {{ count < 13 ? 'upp till ' }}tretton till</a>.</p>
+{% endif %}
+    </article>
+{% endblock %}

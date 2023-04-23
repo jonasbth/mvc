@@ -1,0 +1,73 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Kortlek | mvc{% endblock %}
+
+{% block body %}
+    <article class="no-flex">
+        <h1>En kortlek i PHP</h1>
+
+        <p>En kortlek med spelkort och en korthand har implementerats med klasser i PHP. Klasserna är närmare beskrivna nedan.</p>
+
+        <p>Följande sidor som utnyttjar klasserna finns tillgängliga :</p>
+
+        <ul>
+            <li><a href="{{ path('card_deck') }}">En sorterad kortlek</a>.</li>
+            <li><a href="{{ path('card_deck_shuffle') }}">En blandad kortlek</a>.</li>
+            <li><a href="{{ path('card_deck_draw') }}">Dra ett kort</a>.</li>
+            <li><a href="{{ path('card_deck_draw', {num: 5}) }}">Dra fem kort (ett ex.)</a>.</li>
+            <li><a href="{{ path('card_deck_deal', {players: 2, num: 5}) }}">Dela fem kort till två spelare (ett ex.)</a>.</li>
+        </ul>
+
+        <p>För att skapa en ny kortlek som sparas i sessionen, besök en sorterad eller en blandad kortlek.</p>
+
+        <h2>Beskrivning av klasserna</h2>
+
+        <p>För att beskriva ett spelkort, så finns en abstrakt basklass kallad <code>CardBase</code>. Den har ett privat attribut <code>$rank</code>,
+           som anger kortets värde (1 - 13), samt ett antal metoder. För de fyra färgerna (också kallade sviter, eng. suit), så finns fyra
+           konkreta klasser <code>Spades, Hearts, Diamonds och Clubs</code>, som ärver av <code>CardBase</code>. Se detaljer i klassdiagrammet
+           nedan.</p>
+
+        <p>Den enda metoden som behöver specialiseras i de konkreta kortklasserna, förutom konstruktorn, är <code>getHTMLEntity()</code>,
+           som returnerar en HTML-entitet som ger en förenklad grafisk representation av ett kort.</p>
+
+        <p>En hel kortlek beskrivs av klassen <code>CardDeck</code>. Den har ett privat attribut $deck som är en array som innehåller själva korten.
+           För att skapa en ny komplett kortlek finns metoden <code>reset()</code>. Den använder klasskonstanterna <code>SUIT_SIZE</code> och
+           <code>SUITS</code> (en array) för att generera en vanlig kortlek. Det finns också en <code>shuffle()</code>-metod för att blanda kortleken
+           och en <code>draw()</code>-metod för att dra och returnera ett antal kort från kortleken.</p>
+
+        <p>För att förenkla itereringen över korten i kortleken, så implementerar <code>CardDeck</code> interface:et <code>Iterator</code>, som finns
+           beskrivet i PHP. Även interface:et <code>Countable</code> implementeras, vilket gör att PHP:s <code>count()</code>-funktion fungerar på
+           klassen. Speciellt i Twig-koden var det smidigt att kunna iterera över kortleken med en konstruktion som 
+           {% verbatim %}<code>{% for card in deck %}</code>{% endverbatim %}.</p>
+
+        <p>Den sista klassen som implementerats är <code>CardHand</code>, som kan användas för att hålla ett antal kort. Attribut som finns är
+           arrayen <code>$hand</code> och strängen <code>$name</code>. Förutom konstruktorn finns några metoder som <code>addCards()</code> och
+           <code>getName()</code>. Vid behov kan man utöka klassen med fler metoder.</p>
+
+        <p>Även <code>CardHand</code> implementerar interface:en <code>Iterator</code> och <code>Countable</code>, vilket ger ett antal småmetoder
+           samt attributet <code>$position</code>. Noterbart är att <code>CardHand</code> saknar referenser till de specifika kortklasserna,
+           så den kan användas som en generell containerklass, men tanken är att den skall innehålla spelkort.</p>
+
+        <p>Här är ett klassdiagram skapat med <a href="https://app.diagrams.net/">draw.io</a>:</p>
+
+        <img class="no-margin" src="{{ asset('img/classdiagram_kmom02.png') }}" alt="Ett klassdiagram" width="831">
+
+    </article>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
