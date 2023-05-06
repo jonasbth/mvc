@@ -1,0 +1,107 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Kortspel 21 | mvc{% endblock %}
+
+{% block body %}
+{% set player_name = game.playerName() %}
+{% set bank_name = game.bankName() %}
+
+{%- set player_hand = game.playerHand() %}
+{% set bank_hand = game.bankHand() %}
+{% set cards_left = game.cardsLeft() %}
+{% set players_turn = game.playersTurn() %}
+{% set new_round = false %}
+
+{%- set player_points = player_hand.getMaxPoints21() %}
+{% set bank_points = bank_hand.getMaxPoints21() %}
+
+    <article class="no-flex">
+        <h1>Kortspelet 21</h1>
+
+        <table>
+            <tr>
+                <th>Omgång</th>
+                <th>{{ player_name }}</th>
+                <th>Banken</th>
+                <th>Kort kvar</th>
+            </tr>
+            <tr>
+                <td>{{ game.round() }}</td>
+                <td>{{ game.playerWins() }}</td>
+                <td>{{ game.bankWins() }}</td>
+                <td>{{ cards_left }}</td>
+            </tr>
+        </table>
+
+        <p>{{ player_name|last == 's' ? player_name : player_name ~ 's' }} hand:
+            (värd {{ game.playerWorth() }})</p>
+
+        <div class="cardContainer">
+            {%~ for card in player_hand %}
+            <span class="card {{ card.getSuit() }}">{{ card.getHTMLEntity() | raw }}</span>
+            {%~ endfor %}
+        </div>
+
+{% if not players_turn %}
+        <p>{{ bank_name|last == 's' ? bank_name : bank_name ~ 's' }} hand:
+            (värd {{ bank_points }})</p>
+
+        <div class="cardContainer">
+            {%~ for card in bank_hand %}
+            <span class="card {{ card.getSuit() }}">{{ card.getHTMLEntity() | raw }}</span>
+            {%~ endfor %}
+        </div>
+{% endif %}
+
+        <form method="post" action="">
+{% if players_turn %}
+    {%~ if player_points < 21 %}
+        {%~ if cards_left > 32 %}
+            <button type="submit" name="new_card">Nytt kort</button>
+            <button type="submit" name="stop">Stanna</button>
+        {%~ else %}
+            <p>Bara två kort kvar till banken.</p>
+            <button type="submit" name="stop">Bankens spel</button>
+        {%~ endif %}
+    {%~ elseif player_points == 21 %}
+            <p>Bra spelat så långt!</p>
+            <button type="submit" name="stop">Bankens spel</button>
+    {%~ else %}
+            <p>Över 21, bättre lycka nästa gång.</p>
+
+        {%- set new_round = true %}
+    {%~ endif %}
+
+{%- else %}
+    {%~ if bank_points <= 21 and bank_points >= player_points %}
+            <p>Banken vann denna runda. Lycka till nästa gång.</p>
+    {%~ else %}
+            <p>Bra spelat, en vinst över banken!</p>
+    {%~ endif %}
+
+    {%- set new_round = true %}
+{%~ endif %}
+
+{%- if new_round %}
+    {%~ if cards_left > 33 %}
+            <button type="submit" name="next_round">Ny runda</button>
+    {%~ else %}
+            <p>Spelet är slut, {{ cards_left > 0 ? "bara "}}{{ cards_left }} kort kvar.
+
+        {%~ if game.playerWins() > game.bankWins() %}
+            <img class="img-win-21" src="{{ asset('img/partying-face.gif') }}" alt="Partying face" width="60"></br>
+            Grattis, total vinst över banken!</p>
+        {%~ elseif game.playerWins() == game.bankWins() %}
+            Bra jobbat, lika många vinster som banken!</p>
+        {%~ else %}
+            Tyvärr, banken tog flest rundor den här gången.</p>
+        {%~ endif %}
+
+            <button type="submit" name="new_game">Spela igen</button>
+    {%~ endif %}
+{% endif %}
+        </form>
+
+    </article>
+{% endblock %}
+

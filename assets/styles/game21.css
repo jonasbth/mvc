@@ -1,0 +1,74 @@
+/**
+ *  game21.css
+ */
+fieldset {
+    border: 1px solid #222;
+    border-radius: 6px;
+}
+
+button {
+    font-family: "Roboto", sans-serif;
+    color: #fff;
+    background-color: #bc5c13;
+    border-style: none;
+    border-radius: 6px;
+    padding: 5px 10px;
+    margin-bottom: 5px;
+    margin-right: 25px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #149664;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+input {
+    font-family: "Roboto", sans-serif;
+    display: block;
+    color: #222;
+    background-color: #f5e7d7;
+    border-style: none;
+    border-radius: 6px;
+    margin: 5px 0 25px;
+    padding: 3px 5px;
+    outline-color: #bc5c13;
+    outline-offset: 1px;
+}
+
+table {
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 1.5rem;
+    background-color: #dba87f;
+    border: 2px solid #222;
+    border-spacing: 0;
+    border-radius: 6px;
+    margin: 0 0 25px;
+    text-align: center;
+}
+
+td,
+th {
+    padding: 0.4em 0.8em;
+    border-right: 1px solid #222;
+}
+
+th {
+    font-weight: 600;
+    border-bottom: 1px solid #222;
+}
+
+td:last-child,
+th:last-child {
+    border-right: none;
+}
+
+.img-win-21 {
+    margin: 0;
+    vertical-align: top;
+}
+

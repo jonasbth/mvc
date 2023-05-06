@@ -1,0 +1,45 @@
+/**
+ *  header.css
+ */
+.site-header {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-position: center 65%;
+    background-size: cover;
+    color: #f5e7d7;
+    min-height: 280px;
+}
+
+.site-title {
+    font-size: 3rem;
+    display: block;
+    margin: 0 0 20px 80px;
+    padding-top: 30px;
+}
+
+.site-header ul {
+    list-style-type: none;
+    margin: 0 0 0 80px;
+    padding: 0 0 20px;
+}
+
+.site-header li {
+    display: inline-block;
+    margin-right: 10px;
+    border-radius: 8px;
+}
+
+.site-header li:hover {
+    background-color: rgba(66, 227, 157, 0.5);
+    box-shadow: 0 0 4px 2px rgba(66, 227, 157, 0.5);
+}
+
+.site-header a {
+    color: #f5e7d7;
+    font-size: 1.4rem;
+    text-decoration: none;
+    padding: 0.1em 0.3em;
+}
+

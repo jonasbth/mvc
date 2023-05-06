@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Kortspel 21 | mvc{% endblock %}
+
+{% block body %}
+    <article class="no-flex">
+        <h1>Kortspelet 21</h1>
+
+        <form method="post" action="">
+            <fieldset>
+                <legend>Inställningar till spelet</legend>
+                <label>Spelarnamn:
+                    <input type="text" name="player_name" value="{{ player_name }}" maxlength="15" required>
+                </label>
+                <button type="submit" name="post_form">Starta spelet</button>
+            </fieldset>
+        </form>
+
+    </article>
+{% endblock %}
+

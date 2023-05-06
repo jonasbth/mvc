@@ -1,0 +1,19 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Kortspel 21 | mvc{% endblock %}
+
+{% block body %}
+    <article class="no-flex">
+        <h1>Kortspelet 21 i PHP</h1>
+
+        <p>En beskrivning av spelet med regler.</p>
+
+        <p>En länk till att <a href="{{ path('game_reset') }}">förstöra sessionen</a>.</p>
+
+        <p>En länk till att <a href="{{ path('game_init') }}">starta spelet</a>.</p>
+
+        <p>En länk till <a href="{{ path('game_doc') }}">dokumentation</a>.</p>
+
+    </article>
+{% endblock %}
+
