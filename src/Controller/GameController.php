@@ -39,13 +39,20 @@ class GameController extends AbstractController
     public function gameInit(SessionInterface $session): Response
     {
         if ($session->has("game")) {
-            $playerName = $session->get("game")->playerName();
+            $game = $session->get("game");
+            $playerName = $game->playerName();
+            $playerUseChance = $game->playerUseChance();
+            $bankUseChance = $game->bankUseChance();
         } else {
             $playerName = "";
+            $playerUseChance = false;
+            $bankUseChance = false;
         }
 
         $data = [
-            "player_name" => $playerName
+            "player_name" => $playerName,
+            "player_chance" => $playerUseChance,
+            "bank_chance" => $bankUseChance
         ];
 
         return $this->render("game/init.html.twig", $data);
@@ -59,8 +66,10 @@ class GameController extends AbstractController
     {
         // $session->invalidate();
         $playerName = $request->request->get("player_name");
+        $playerChance = ($request->request->get("player_chance") ?? "off") === "on";
+        $bankChance = ($request->request->get("bank_chance") ?? "off") === "on";
         $game = new Game21();
-        $game->newGame($playerName);
+        $game->newGame($playerName, $playerChance, $bankChance);
 
         $session->set("game", $game);
 
@@ -85,7 +94,11 @@ class GameController extends AbstractController
         SessionInterface $session
     ): Response
     {
-        $game = $session->get("game");
+        if ($session->has("game")) {
+            $game = $session->get("game");
+        } else {
+            return $this->redirectToRoute("game_init");
+        }
 
         if ($request->request->has("new_card")) {
             $game->playerNewCard();

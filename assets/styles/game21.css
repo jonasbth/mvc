@@ -6,6 +6,12 @@ fieldset {
     border-radius: 6px;
 }
 
+legend {
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
 button {
     font-family: "Roboto", sans-serif;
     color: #fff;
@@ -22,22 +28,35 @@ button:hover {
     background-color: #149664;
 }
 
-label {
-    display: block;
-    margin-top: 10px;
-}
-
-input {
+input[type="text"] {
     font-family: "Roboto", sans-serif;
     display: block;
     color: #222;
     background-color: #f5e7d7;
     border-style: none;
     border-radius: 6px;
-    margin: 5px 0 25px;
+    margin: 5px 0 20px;
     padding: 3px 5px;
     outline-color: #bc5c13;
     outline-offset: 1px;
+}
+
+input[type="checkbox"] {
+    accent-color: #bc5c13;
+}
+
+.txt-label {
+    display: block;
+    margin-top: 10px;
+}
+
+.chk-label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.chk-label:last-of-type {
+    margin-bottom: 25px;
 }
 
 table {
@@ -65,6 +84,15 @@ th {
 td:last-child,
 th:last-child {
     border-right: none;
+}
+
+meter {
+    margin-top: 8px;
+    margin-right: 6px;
+}
+
+.chance-percent {
+    font-size: 1rem;
 }
 
 .img-win-21 {

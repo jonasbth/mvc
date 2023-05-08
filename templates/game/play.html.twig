@@ -5,14 +5,16 @@
 {% block body %}
 {% set player_name = game.playerName() %}
 {% set bank_name = game.bankName() %}
-
-{%- set player_hand = game.playerHand() %}
+{% set player_hand = game.playerHand() %}
 {% set bank_hand = game.bankHand() %}
-{% set cards_left = game.cardsLeft() %}
+
+{%- set cards_left = game.cardsLeft() %}
+{% set player_use_chance = game.playerUseChance() %}
 {% set players_turn = game.playersTurn() %}
 {% set new_round = false %}
 
 {%- set player_points = player_hand.getMaxPoints21() %}
+{% set player_chance = game.playerChance() %}
 {% set bank_points = bank_hand.getMaxPoints21() %}
 
     <article class="no-flex">
@@ -59,6 +61,21 @@
         {%~ if cards_left > 32 %}
             <button type="submit" name="new_card">Nytt kort</button>
             <button type="submit" name="stop">Stanna</button>
+
+            {%~ if player_use_chance %}
+            <div>
+                <meter min="0" max="100" low="33" high="66" optimum="80" title="Chans för ett kort till"
+                    value="{{ player_chance[0] }}"></meter>
+                <span class="chance-percent">{{ player_chance[0] }} %</span>
+            </div>
+                {%~ if player_chance[1] >= 0 %}
+            <div>
+                <meter min="0" max="100" low="33" high="66" optimum="80" title="Chans med ess = 14"
+                    value="{{ player_chance[1] }}"></meter>
+                <span class="chance-percent">{{ player_chance[1] }} %</span>
+            </div>
+                {%~ endif %}
+            {%~ endif %}
         {%~ else %}
             <p>Bara två kort kvar till banken.</p>
             <button type="submit" name="stop">Bankens spel</button>
@@ -89,19 +106,18 @@
             <p>Spelet är slut, {{ cards_left > 0 ? "bara "}}{{ cards_left }} kort kvar.
 
         {%~ if game.playerWins() > game.bankWins() %}
-            <img class="img-win-21" src="{{ asset('img/partying-face.gif') }}" alt="Partying face" width="60"></br>
+            <img class="img-win-21" src="{{ asset('img/partying-face.gif') }}" alt="Partying face" width="60"><br>
             Grattis, total vinst över banken!</p>
         {%~ elseif game.playerWins() == game.bankWins() %}
-            Bra jobbat, lika många vinster som banken!</p>
+            <br>Bra jobbat, lika många vinster som banken!</p>
         {%~ else %}
-            Tyvärr, banken tog flest rundor den här gången.</p>
+            <br>Tyvärr, banken tog flest rundor den här gången.</p>
         {%~ endif %}
 
             <button type="submit" name="new_game">Spela igen</button>
     {%~ endif %}
 {% endif %}
         </form>
-
     </article>
 {% endblock %}
 

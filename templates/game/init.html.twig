@@ -8,9 +8,17 @@
 
         <form method="post" action="">
             <fieldset>
-                <legend>Inställningar till spelet</legend>
-                <label>Spelarnamn:
+                <legend>Inställningar</legend>
+                <label class="txt-label">Spelarnamn:
                     <input type="text" name="player_name" value="{{ player_name }}" maxlength="15" required>
+                </label>
+                <label class="chk-label">
+                    <input type="checkbox" name="player_chance" value="on"{{ player_chance ? " checked" }}>
+                    Visa chansen för ett lyckosamt draget kort
+                </label>
+                <label class="chk-label">
+                    <input type="checkbox" name="bank_chance" value="on"{{ bank_chance ? " checked" }}>
+                    Låt banken använda sannolikheter för att bli smartare
                 </label>
                 <button type="submit" name="post_form">Starta spelet</button>
             </fieldset>
