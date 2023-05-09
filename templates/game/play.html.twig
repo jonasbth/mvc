@@ -58,7 +58,7 @@
         <form method="post" action="">
 {% if players_turn %}
     {%~ if player_points < 21 %}
-        {%~ if cards_left > 32 %}
+        {%~ if cards_left > 2 %}
             <button type="submit" name="new_card">Nytt kort</button>
             <button type="submit" name="stop">Stanna</button>
 
@@ -100,7 +100,7 @@
 {%~ endif %}
 
 {%- if new_round %}
-    {%~ if cards_left > 33 %}
+    {%~ if cards_left > 3 %}
             <button type="submit" name="next_round">Ny runda</button>
     {%~ else %}
             <p>Spelet är slut, {{ cards_left > 0 ? "bara "}}{{ cards_left }} kort kvar.
@@ -118,6 +118,23 @@
     {%~ endif %}
 {% endif %}
         </form>
+<!-- Show card count for debug purpose -->
+{% set card_count = game.cardCount() %}
+        <table>
+            <caption>Kortfrekvens (antal av valör)</caption>
+            <tr>
+{% for i in 1..13 %}
+                <th>{{ i }}</th>
+{% endfor %}
+                <th>Totalt</th>
+            </tr>
+            <tr>
+{% for i in 1..13 %}
+                <td>{{ card_count[i] }}</td>
+{% endfor %}
+                <td>{{ card_count[0] }}</td>
+            </tr>
+        </table> -->
     </article>
 {% endblock %}
 

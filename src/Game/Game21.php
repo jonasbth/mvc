@@ -240,6 +240,10 @@ class Game21
      */
     public function calcSuccessFactor(int $handWorth): int
     {
+        if ($this->cardCount[0] === 0) {
+            return 0;
+        }
+
         $count = 0;
 
         for ($i = 1; $i < 14; $i++) {
@@ -313,7 +317,13 @@ class Game21
     public function bankTurn(): void
     {
         $this->playersTurn = false;
-        $this->bankPlay();
+
+        if ($this->bankUseChance) {
+            $this->bankPlayChance();
+        } else {
+            $this->bankPlay();
+        }
+
         $bankPoints = $this->bankHand->getMaxPoints21();
 
         if ($bankPoints <= 21 && $bankPoints >= $this->playerHand->getMaxPoints21()) {
@@ -321,6 +331,29 @@ class Game21
         } else {
             $this->playerWins++;
         }
+    }
+
+    /**
+     *  Let the bank play one round of "21", using probabilities of the next drawn card.
+     *
+     */
+    public function bankPlayChance(): void
+    {
+        $this->bankHand->reset();
+
+        do {
+            $this->bankHand->addCards($this->drawCards(1));
+            $points = $this->bankHand->getPoints21();
+
+            if (count($points) === 1) {
+                $chanceHand = $this->calcSuccessFactor($points[0]);
+                $chanceLow = 40;
+            } else {
+                $chanceHand = $this->calcSuccessFactor($points[1]);
+                $chanceLow = 30;
+            }
+
+        } while ($chanceHand >= $chanceLow && $this->cardsLeft() > 0);
     }
 
     /**
