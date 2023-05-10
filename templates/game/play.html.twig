@@ -118,21 +118,21 @@
     {%~ endif %}
 {% endif %}
         </form>
-<!-- Show card count for debug purpose -->
-{% set card_count = game.cardCount() %}
+<!-- Show card count for debug purpose
+{# set card_count = game.cardCount() #}
         <table>
             <caption>Kortfrekvens (antal av valör)</caption>
             <tr>
-{% for i in 1..13 %}
-                <th>{{ i }}</th>
-{% endfor %}
+{# for i in 1..13 #}
+                <th>{# i #}</th>
+{# endfor #}
                 <th>Totalt</th>
             </tr>
             <tr>
-{% for i in 1..13 %}
-                <td>{{ card_count[i] }}</td>
-{% endfor %}
-                <td>{{ card_count[0] }}</td>
+{# for i in 1..13 #}
+                <td>{# card_count[i] #}</td>
+{# endfor #}
+                <td>{# card_count[0] #}</td>
             </tr>
         </table> -->
     </article>

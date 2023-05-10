@@ -15,9 +15,12 @@
             <li><a href="{{ path('api_deck_draw') }}">Dra ett kort (GET, POST)</a>.</li>
             <li><a href="{{ path('api_deck_draw', {num: 5}) }}">Dra fem kort (ett ex.) (GET, POST)</a>.</li>
             <li><a href="{{ path('api_deck_deal', {players: 2, num: 5}) }}">Dela fem kort till två spelare (ett ex.) (GET, POST)</a>.</li>
+            <li><a href="{{ path('api_game') }}">Visa aktuell ställning i kortspelet "21" (GET)</a>.</li>
         </ul>
 
         <p>För att skapa en ny kortlek som sparas i sessionen, besök en sorterad eller en blandad kortlek.</p>
+
+        <p>För att visa ställning i "21", så måste ett spel vara aktivt och sparat i sessionen.</p>
 
     </article>
 {% endblock %}

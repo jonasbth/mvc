@@ -136,4 +136,68 @@ class CardControllerJson
 
         return $response;
     }
+
+    #[Route("/api/game", name: "api_game", methods: ['GET'])]
+    public function jsonGame(SessionInterface $session): JsonResponse
+    {
+        if ($session->has("game")) {
+            $game = $session->get("game");
+        } else {
+            $data = [
+                'error_msg' => "No active game session"
+            ];
+
+            $response = new JsonResponse($data);
+
+            $encOptions = $response->getEncodingOptions() | JSON_PRETTY_PRINT;
+            $response->setEncodingOptions($encOptions);
+
+            return $response;
+        }
+
+        // Player info
+        $hand = $game->playerHand();
+        $cardArr = [];
+
+        foreach ($hand as $card) {
+            $cardArr[] = $card->getSuit() . " " . $card->getRank();
+        }
+
+        $player = [
+            'player' => $hand->getName(),
+            'hand' => $cardArr
+        ];
+
+        // Bank info
+        $hand = $game->bankHand();
+        $cardArr = [];
+
+        if (!$game->playersTurn()) {
+            foreach ($hand as $card) {
+                $cardArr[] = $card->getSuit() . " " . $card->getRank();
+            }
+        }
+
+        $bank = [
+            'player' => $hand->getName(),
+            'hand' => $cardArr
+        ];
+
+        // Assemble all data
+        $data = [
+            'round' => $game->round(),
+            'player_wins' => $game->playerWins(),
+            'bank_wins' => $game->bankWins(),
+            'cards_left' => $game->cardsLeft(),
+            'players_turn' => $game->playersTurn(),
+            'players' => [$player, $bank]
+        ];
+
+        $response = new JsonResponse($data);
+
+        $encOptions = $response->getEncodingOptions() | JSON_PRETTY_PRINT;
+        $response->setEncodingOptions($encOptions);
+
+        return $response;
+    }
 }
