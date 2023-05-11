@@ -6,12 +6,86 @@
     <article class="no-flex">
         <h1>Dokumentation till kortspelet 21</h1>
 
-        <p>En beskrivning av implementationen.</p>
+        <p>Kortspelet använder ramverket Symfony och bygger på designmönstret MVC, Model View Controller. Controllerklassen
+           <code>GameController</code> definerar spelets routes. Det finns en route game/init, som visar ett formulär där man kan
+           göra några inställningar till spelet. Formuläret postas till samma URL game/init där spelklassen <code>Game21</code>
+           instantieras och initieras. Därefter sparas hela spelobjektet i sessionen.</p>
 
-        <p></p>
+        <p>När spelet initierats sker en redirect till routen game/play som visar spelplanen där spelaren kan välja att dra ett
+           nytt kort eller att stanna. De val spelaren gör postas till game/play, där rätt metod anropas i gameklassen,
+           varpå en redirect sker till spelplanen igen.</p>
 
-        <p></p>
+        <p>För att rendera spelplanen så används template-motorn Twig, som alltså utgör V:et i MVC. För att undvika allt för mycket
+           kopierande av data, så skickas hela spelobjektet med till Twig-mallen. Där används get-metoder för att hämta ut data
+           från objektet som sedan presenteras på skärmen.</p>
 
+        <p>Allmänt så ligger den mesta logiken i modellklassen <code>Game21</code>, där metoder anropas från controllern för att föra
+           spelet framåt, och data hämtas från Twig-mallen för att presenteras. För att hantera alla specialfall som kan uppstå så blir
+           det dessvärre en hel del if-satser filen play.html.twig.</p>
+
+        <p>Lite mera om modellklassen <code>Game21</code>: Den använder sig av de tidigare utvecklade klasserna <code>CardDeck</code>
+           och <code>CardHand</code>, som beskrevs närmare i <a href="{{ path('card_index') }}">förra kursmomentet</a>. Nedan är ett
+           klassdiagram som visar hur klasserna hänger ihop. Endast attributen är utskrivna i diagrammet, inga metoder.</p>
+
+        <p><img class="no-margin" src="{{ asset('img/classdiagram_kmom03.png') }}" alt="Ett klassdiagram" width="791"></p>
+
+        <p><code>Game21</code> äger genom komposition en kortlek <code>CardDeck</code> och en spelarhand och bankens hand, båda av
+           klassen <code>CardHand</code>. Jag valde att rita den starkare formen komposition indikerad med en fylld romb i diagrammet,
+           eftersom kortleken och korthänderna skapas i spelobjektet och förstörs om objektet förstörs. Kortlekens och korthandens relation
+           till ett enskilt spelkort är dock svagare och har markerats som en aggregation med en ofylld romb.</p>
+
+        <p>Det har tillkommit några metoder i <code>CardHand</code> sedan förra kursmomentet: En reset-metod och ett par metoder för att
+           räkna ut en hands värde enligt reglerna för tjugoett.</p>
+
+        <p>För att nämna något om metoderna i <code>Game21</code>-klassen, så finns det get-metoder för de flesta av klassens attribut 
+           (medlemsvariabler). För att initiera ett nytt spel finns en metod <code>newGame()</code> och för att starta en ny runda finns
+           metoden <code>nextRound()</code>. För att låta spelaren dra ett nytt kort finns <code>playerNewCard()</code> och bankens spel
+           ligger i metoden <code>bankTurn()</code>. Beroende om banken använder sannolikheter eller ej, så anropas <code>bankPlayChance()</code>
+           eller <code>bankPlay()</code>.</p>
+
+        <p>Det fanns krav i uppgiften att rita flödesdiagram och skriva pseudokod till åtminstone en del av lösningen. Jag valde att skapa dessa
+           artefakter till metoden <code>bankPlayChance()</code>, och hoppas att det räcker (för det är väldigt tidskrävande).</p>
+
+        <p>Av flödesdiagrammet följer att metoden hanterar två olika fall: Normalflödet är rakt nedåt, där alla eventuella ess räknas som 1,
+           och specialfallet, som avviker till vänster, där det finns ett ess som räknas som 14, och fortfarande ger en giltig hand, dvs. max 21.</p>
+
+        <p><img class="no-margin" src="{{ asset('img/flowchart_kmom03.png') }}" alt="Ett flödesdiagram" width="437"></p>
+
+        <p>För specialfallet tillåter jag lite djärvare spel av banken, med krav på en sannolikhet över 0.3 (eller 30 %) för att nästa dragna
+           kort fortfarande ger en giltig hand. För normalfallet krävs minst 40 % sannolikhet. Detta svarar mot att banken stannar strax under
+           ett värde på handen av 17, räknat på en komplett kortlek (52 kort).</p>
+
+        <p>I det mera osmarta spelet av banken, som finns i metoden <code>bankPlay()</code>, så drar banken nya kort tills värdet uppgår till
+           minst 17, varefter den stannar. Man kan förvänta sig att metoderna beter sig annorlunda framförallt när det är få kort kvar i
+           kortleken, och då fördelningen av kort kan vara skev eller ojämn.</p>
+
+        <p>Avslutningsvis så följer ett försök till pseudokod för metoden <code>bankPlayChance()</code>:</p>
+
+        <p><pre>
+function bankPlayChance()
+    // There will be at least two cards left when calling this method
+    Reset the bank hand.
+
+    Do
+        Draw a card from the deck and add to the bank hand.
+        Compute the possible totals of the hand, considering that an ace
+            can be worth 1 or 14.
+
+        If there is just one possible valid totals of the hand:
+            Compute the probability that the next card drawn will result
+                in a hand worth 21 or less.
+            Set a probability variable to 40 %.
+
+        Else (there are two possible totals)
+            Compute the probability for the highest total of the hand, that
+                the next card drawn will result in a hand worth 21 or less.
+            Set a probability variable to 30 %.
+
+    While (The probability of the hand >= the probability variable (30 or 40))
+          And There are cards left in the deck.
+
+    Return
+        </pre></p>
     </article>
 {% endblock %}
 

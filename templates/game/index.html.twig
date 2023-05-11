@@ -6,13 +6,28 @@
     <article class="no-flex">
         <h1>Kortspelet 21 i PHP</h1>
 
-        <p>En beskrivning av spelet med regler.</p>
+        <p>Välkommen till spelet "21" där det gäller att dra kort från en kortlek och komma så nära summan 21 som möjligt, men ej få över 21, varvid
+           spelaren blir "tjock" och förlorar rundan.</p>
 
-        <p>En länk till att <a href="{{ path('game_reset') }}">förstöra sessionen</a>.</p>
+        <p>Motspelaren är banken som har fördelen att spela efter spelaren, och alltså kan vinna en runda utan att behöva dra några kort! Vid lika
+           poäng vinner också banken rundan. Banken vet dock inte om spelarens hand. Spelet forsätter tills korleken är slut, och den som har flest
+           vunna rundor vinner totalt.</p>
 
-        <p>En länk till att <a href="{{ path('game_init') }}">starta spelet</a>.</p>
+        <p>Ett ess kan vara värt 1 eller 14, vilket som är mest fördelaktigt. Det behöver finnas minst 4 kort kvar för att en runda skall startas,
+           annars avslutas spelet. Dessutom behöver det finnas minst två kort kvar till bankens sista spel.</p>
 
-        <p>En länk till <a href="{{ path('game_doc') }}">dokumentation</a>.</p>
+        <p>Det finns möjlighet att få hjälp av korträkning och sannolikheter för att öka sina chanser i spelet. Om man väljer det, så visas sannolikheten
+           i procent att nästa dragna kort blir lyckosamt, dvs. att spelaren inte kommer över 21. Man kan också välja att låta banken använda sig
+           av sannolikheter för att bli smartare. Hur banken spelar förklaras lite närmare på <a href="{{ path('game_doc') }}">dokumentationssidan</a>.
+           Vetskapen om sannolikheter blir mer betydelsefull mot slutet av spelet när det är få kort kvar.</p>
+
+        <p>I övrigt håller sig spelet på den lagliga sidan, så det förekommer inget spel om pengar.</p>
+
+        <p>Nog med regler, dags att <a href="{{ path('game_init') }}">starta spelet</a>.</p>
+
+        <p>Lite om spelets uppbyggnad finns på <a href="{{ path('game_doc') }}">dokumentationssidan</a>.</p>
+
+        <p>Om sajten fungerar dåligt, så kan det kanske hjälpa med denna länk att <a href="{{ path('game_reset') }}">förstöra sessionen</a>.</p>
 
     </article>
 {% endblock %}
