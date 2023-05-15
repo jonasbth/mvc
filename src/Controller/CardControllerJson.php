@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Card\CardDeck;
 use App\Card\CardHand;
+
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -63,6 +64,9 @@ class CardControllerJson
     public function apiDeckDraw(int $num, SessionInterface $session): JsonResponse
     {
         if ($session->has("deck")) {
+            /**
+             *  @var CardDeck $deck
+             */
             $deck = $session->get("deck");
         } else {
             $deck = new CardDeck();
@@ -100,6 +104,9 @@ class CardControllerJson
     public function apiDeckDeal(int $players, int $num, SessionInterface $session): JsonResponse
     {
         if ($session->has("deck")) {
+            /**
+             *  @var CardDeck $deck
+             */
             $deck = $session->get("deck");
         } else {
             $deck = new CardDeck();
@@ -141,6 +148,9 @@ class CardControllerJson
     public function jsonGame(SessionInterface $session): JsonResponse
     {
         if ($session->has("game")) {
+            /**
+             *  @var \App\Game\Game21 $game
+             */
             $game = $session->get("game");
         } else {
             $data = [

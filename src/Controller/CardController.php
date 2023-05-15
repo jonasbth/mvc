@@ -53,6 +53,9 @@ class CardController extends AbstractController
     public function cardDeckDraw(int $num, SessionInterface $session): Response
     {
         if ($session->has("deck")) {
+            /**
+             *  @var CardDeck $deck
+             */
             $deck = $session->get("deck");
         } else {
             $deck = new CardDeck();
@@ -75,6 +78,9 @@ class CardController extends AbstractController
     public function cardDeckDeal(int $players, int $num, SessionInterface $session): Response
     {
         if ($session->has("deck")) {
+            /**
+             *  @var CardDeck $deck
+             */
             $deck = $session->get("deck");
         } else {
             $deck = new CardDeck();

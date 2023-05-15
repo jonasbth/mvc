@@ -8,6 +8,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ReportControllerTwig extends AbstractController
 {
+    /**
+     *  A mapping int->string to find the right image of a die.
+     *
+     *  @var array<int, string>
+     */
     public static $dieMap = [
         1 => "one",
         2 => "two",
@@ -18,7 +23,7 @@ class ReportControllerTwig extends AbstractController
     ];
 
     #[Route("/", name: "me")]
-    public function me(): Response
+    public function mePage(): Response
     {
         return $this->render('me.html.twig');
     }

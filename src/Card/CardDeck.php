@@ -5,14 +5,33 @@ namespace App\Card;
 use Countable;
 use Iterator;
 
+/**
+ *  A playing card deck class.
+ *
+ *  @implements Iterator<int, CardBase>
+ */
 class CardDeck implements Countable, Iterator
 {
+    /**
+     *  A deck of cards.
+     *
+     *  @var array<int, CardBase>
+     */
     private array $deck = [];
+
+    /**
+     *  The position in the deck.
+     *
+     *  Used by the Iterator interface
+     */
     private int $position = 0;
 
     public const SUIT_SIZE = 13;
     public const SUITS = ['Spades', 'Hearts', 'Diamonds', 'Clubs'];
 
+    /**
+     *  Constructor.
+     */
     public function __construct()
     {
         $this->reset();
@@ -72,7 +91,7 @@ class CardDeck implements Countable, Iterator
      *
      *  @param int $num  Number of cards to pop and return from the deck. Defaults to 1.
      *
-     *  @return array  An array of at most $num card(s).
+     *  @return array<int, CardBase>  An array of at most $num card(s).
      */
     public function draw(int $num = 1): array
     {
@@ -80,30 +99,56 @@ class CardDeck implements Countable, Iterator
     }
 
     /**
-     *  Required methods below of the Iterator interface.
+     *  Reset the position.
+     *
+     *  Required method of the Iterator interface.
      */
     public function rewind(): void
     {
         $this->position = 0;
     }
 
-    #[\ReturnTypeWillChange]
-    public function current()
+    /**
+     *  Return the current card.
+     *
+     *  Required method of the Iterator interface.
+     *
+     *  @return CardBase  A card.
+     */
+    public function current(): CardBase
     {
         return $this->deck[$this->position];
     }
 
-    #[\ReturnTypeWillChange]
-    public function key()
+    /**
+     *  Return the position in the deck.
+     *
+     *  Required method of the Iterator interface.
+     *
+     *  @return int  The position.
+     */
+    public function key(): int
     {
         return $this->position;
     }
 
+    /**
+     *  Advance the position in the deck.
+     *
+     *  Required method of the Iterator interface.
+     */
     public function next(): void
     {
         ++$this->position;
     }
 
+    /**
+     *  Return whether the position is valid.
+     *
+     *  Required method of the Iterator interface.
+     *
+     *  @return bool  true or false.
+     */
     public function valid(): bool
     {
         return isset($this->deck[$this->position]);

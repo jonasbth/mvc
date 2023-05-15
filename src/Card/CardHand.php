@@ -5,12 +5,35 @@ namespace App\Card;
 use Countable;
 use Iterator;
 
+/**
+ *  A playing card hand class.
+ *
+ *  @implements Iterator<int, CardBase>
+ */
 class CardHand implements Countable, Iterator
 {
+    /**
+     *  A card hand.
+     *
+     *  @var array<int, CardBase>
+     */
     private array $hand = [];
+
+    /**
+     *  The position in the hand.
+     *
+     *  Used by the Iterator interface
+     */
     private int $position = 0;
+
     private string $name = "";
 
+    /**
+     *  Constructor.
+     *
+     *  @param string $name The name of the hand.
+     *  @param array<int, CardBase> $cards  An array of cards.
+     */
     public function __construct(string $name = "", array $cards = [])
     {
         $this->name = $name;
@@ -30,7 +53,7 @@ class CardHand implements Countable, Iterator
     /**
      *  Add card(s) to hand.
      *
-     *  @param array $cards  The array of cards to add.
+     *  @param array<int, CardBase> $cards  The array of cards to add.
      */
     public function addCards(array $cards): void
     {
@@ -51,7 +74,7 @@ class CardHand implements Countable, Iterator
      *
      *  For totals less than 21, up to two values can be returned as an ace can be worth 1 or 14.
      *
-     *  @return int[]  The points array.
+     *  @return array<int, int>  The points array.
      */
     public function getPoints21(): array
     {
@@ -92,7 +115,7 @@ class CardHand implements Countable, Iterator
     {
         $points = $this->getPoints21();
 
-        return array_pop($points);
+        return array_pop($points) ?? 0;
     }
 
     /**
@@ -108,30 +131,56 @@ class CardHand implements Countable, Iterator
     }
 
     /**
-     *  Required methods below of the Iterator interface.
+     *  Reset the position.
+     *
+     *  Required method of the Iterator interface.
      */
     public function rewind(): void
     {
         $this->position = 0;
     }
 
-    #[\ReturnTypeWillChange]
-    public function current()
+    /**
+     *  Return the current card.
+     *
+     *  Required method of the Iterator interface.
+     *
+     *  @return CardBase  A card.
+     */
+    public function current(): CardBase
     {
         return $this->hand[$this->position];
     }
 
-    #[\ReturnTypeWillChange]
-    public function key()
+    /**
+     *  Return the position in the hand.
+     *
+     *  Required method of the Iterator interface.
+     *
+     *  @return int  The position.
+     */
+    public function key(): int
     {
         return $this->position;
     }
 
+    /**
+     *  Advance the position in the hand.
+     *
+     *  Required method of the Iterator interface.
+     */
     public function next(): void
     {
         ++$this->position;
     }
 
+    /**
+     *  Return whether the position is valid.
+     *
+     *  Required method of the Iterator interface.
+     *
+     *  @return bool  true or false.
+     */
     public function valid(): bool
     {
         return isset($this->hand[$this->position]);

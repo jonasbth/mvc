@@ -20,6 +20,8 @@ class Game21
      *  the player´s next card won´t make the hand worth more than 21.
      *
      *  If there is only one valid probability, -1 is given for index position 1.
+     *
+     *  @var array<int, int>
      */
     private array $playerChance;
 
@@ -27,6 +29,8 @@ class Game21
      *  An int array [0..13] of number of cards of each rank.
      *
      *  Keep total card count in array position 0.
+     *
+     *  @var array<int, int>
      */
     private array $cardCount;
 
@@ -160,7 +164,7 @@ class Game21
      *  Two percentages are returned if there is an ace counting as 14, which does not
      *  contribute to a hand above 21, otherwise -1 is returned for index position 1.
      *
-     *  @return int[]  The percentage array.
+     *  @return array<int, int>  The percentage array.
      */
     public function playerChance(): array
     {
@@ -171,7 +175,7 @@ class Game21
      *  Calculate and set the $playerChance array based on the current hand of the player.
      *
      */
-    public function setPlayerChance(): void
+    private function setPlayerChance(): void
     {
         $points = $this->playerHand->getPoints21();
 
@@ -189,7 +193,7 @@ class Game21
      *
      *  The total card count is in array position 0.
      *
-     *  @return int[]  The count array.
+     *  @return array<int, int>  The count array.
      */
     public function cardCount(): array
     {
@@ -217,9 +221,9 @@ class Game21
      *
      *  @param int $numCards  Number of cards to draw.
      *
-     *  @return CardBase[]  An array of cards.
+     *  @return array<int, \App\Card\CardBase>  An array of cards.
      */
-    public function drawCards(int $numCards = 1): array
+    private function drawCards(int $numCards = 1): array
     {
         $cards = $this->deck->draw($numCards);
 
@@ -238,7 +242,7 @@ class Game21
      *
      *  @return int  The probability of success in per cent.
      */
-    public function calcSuccessFactor(int $handWorth): int
+    private function calcSuccessFactor(int $handWorth): int
     {
         if ($this->cardCount[0] === 0) {
             return 0;
@@ -254,7 +258,7 @@ class Game21
             $count += $this->cardCount[$i];
         }
 
-        return round(100 * $count / $this->cardCount[0]);
+        return (int)round(100 * $count / $this->cardCount[0]);
     }
 
     /**
@@ -337,7 +341,7 @@ class Game21
      *  Let the bank play one round of "21", using probabilities of the next drawn card.
      *
      */
-    public function bankPlayChance(): void
+    private function bankPlayChance(): void
     {
         $this->bankHand->reset();
 
@@ -360,7 +364,7 @@ class Game21
      *  Let the bank play one round of "21".
      *
      */
-    public function bankPlay(): void
+    private function bankPlay(): void
     {
         $this->bankHand->reset();
         $this->bankHand->addCards($this->drawCards(2));

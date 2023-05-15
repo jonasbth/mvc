@@ -8,6 +8,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class QuoteControllerJson
 {
+    /**
+     *  A collection of quotes or puns.
+     *
+     *  @var array<int, string>
+     */
     public static $quotes = [
         "There is no place like 127.0.0.1",
         "There are only 10 kinds of people in this world: those who know binary and those who don’t.",
@@ -29,12 +34,21 @@ class QuoteControllerJson
     {
         date_default_timezone_set('Europe/Stockholm');
 
-        $index = random_int(0, count(self::$quotes) - 1);
+        $nOfQuotes = count(self::$quotes);
+
+        // Construct needed for PHPStan level 7
+        if ($nOfQuotes > 1) {
+            $quote = self::$quotes[random_int(0, $nOfQuotes - 1)];
+        } elseif ($nOfQuotes === 1) {
+            $quote = self::$quotes[0];
+        } else {
+            $quote = "There is no quote";
+        }
 
         $data = [
             'timestamp' => date("H:i:s"),
             'date' => date("Y-m-d"),
-            'quote' => self::$quotes[$index]
+            'quote' => $quote
         ];
 
         $response = new JsonResponse($data);

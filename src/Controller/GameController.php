@@ -39,6 +39,9 @@ class GameController extends AbstractController
     public function gameInit(SessionInterface $session): Response
     {
         if ($session->has("game")) {
+            /**
+             *  @var Game21 $game
+             */
             $game = $session->get("game");
             $playerName = $game->playerName();
             $playerUseChance = $game->playerUseChance();
@@ -62,10 +65,9 @@ class GameController extends AbstractController
     public function gameInitPost(
         Request $request,
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
         // $session->invalidate();
-        $playerName = $request->request->get("player_name");
+        $playerName = (string)$request->request->get("player_name");
         $playerChance = ($request->request->get("player_chance") ?? "off") === "on";
         $bankChance = ($request->request->get("bank_chance") ?? "off") === "on";
         $game = new Game21();
@@ -92,9 +94,11 @@ class GameController extends AbstractController
     public function gamePlayPost(
         Request $request,
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
         if ($session->has("game")) {
+            /**
+             *  @var Game21 $game
+             */
             $game = $session->get("game");
         } else {
             return $this->redirectToRoute("game_init");
