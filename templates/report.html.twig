@@ -127,11 +127,70 @@
 
         <section>
             <h2 id="kmom03">Kmom03</h2>
-            <p></p>
+            <p>Kursmoment 3 handlar om att fortsätta med objektorientering i PHP och skapa en lite större applikation i form av ett kortspel.
+               Vi använder också några verktyg för kodvalidering och försöker skapa en snygg kod.</p>
 
-            <p></p>
+            <p>Jag valde standardalternativet, att skapa en applikation för kortspelet 21, och gjorde några av de föreslagna extrauppgifterna,
+               specifikt de som handlade om korträkning för att ge en hjälp till spelaren, och att skapa en lite smartare bank.</p>
 
-            <p></p>
+            <p>Först skulle vi planera kodningen med hjälp av flödesdiagram och pseudokod. Jag har programmerat i några år och aldrig använt
+               någon av dessa tekniker, så det gav upphov till en hel del ångest. Enligt kraven skulle det räcka att lösa en del av uppgiften
+               på detta sätt, så jag valde specifikt funktionen för den "smarta" banken och gjorde den delen mot slutet, när jag hade en
+               fungerande applikation i övrigt. </p>
+
+            <p>Som jag hade på känn så är det ett väldigt omständligt och tidskrävande sätt att arbeta. Det
+               tar kanske uppemot fem gånger så lång tid att skapa flödesdiagram, pseudokod och vanlig kod, som att skriva koden direkt.
+               Till exempel så upptäckte jag ett litet tankefel när jag skulle skriva den vanliga koden, och fick då uppdatera flödesdiagrammet
+               och pseudokoden för att de skulle överensstämma. En fördel kan vara att problemet blir belyst från flera håll och ordenligt
+               genomarbetat, men frågan är om det är värt tiden det tar? Av de två teknikerna är det flödesdiagrammet som kan vara mest
+               givande, pseudokoden var betydligt svårare att skriva, och den kräver nog mycket träning i sig för att bli användbar.
+               Flödesdiagrammet kan också vara bra för att dokumentera koden, men det kan bli jobbigt att uppdatera om koden ändras.</p>
+
+            <p>Jag funderade lite på hur jag löste uppgiften i övrigt utan flödesdiagram, och kom fram till att jag använder en bottom-up teknik:
+               Jag börjar med att implementera en liten konkret del i spelet, som att dela ut ett kort till spelaren, och fortsätter sedan att
+               bygga på med funktionalitet. För mig hade det varit betydligt svårare att jobba top-down, att starta med ett "blankt papper" och
+               försöka fundera ut hur allt skulle hänga ihop med en gång.</p>
+
+            <p>När jag hade fått ihop ett fungerande spel, så visade det sig att den mesta logiken låg i controller-klasserna, så jag gjorde
+               en "refactoring" av koden genom att skapa en modellklass <code>Game21</code> för spelet, där jag lade all logik. I klassen
+               finns också alla variabler för tillståndet i spelet, och get-metoder för att läsa av variablerna. PHP Mess Detector (PHPMD)
+               klagade på att det finns för många publika metoder i klassen <code>Game21</code>. De flesta av dessa är get-metoder för
+               variablerna. Jag funderade lite på att lägga alla variabler i en separat dataklass, men det hade fortfarande blivit fler än
+               10 publika metoder i en sådan, så PHPMD hade i alla fall inte blivit nöjd. Jag kan inte heller se att det hade förenklat koden.</p>
+
+            <p>Vad gäller förbättringspotential i applikationen, så skulle man kunna arbeta mer på layouten i spelplanen, för att få en
+               lite mera riktig spelkänsla med en fast spelplan, som inte ändrar sig så mycket beroende av läget i spelet. Som det är nu
+               fyller jag bara på med information enligt en "normal-flow" metod nedåt på skärmen när det behövs.</p>
+
+            <p>Angående förbättringspotential i koden, så ser i alla fall PHPMD att det finns en sådan vad gäller storleken av spelklassen,
+               som jag beskrev ovan. Vidare så anmärker PHPMD på alla if-else-konstruktioner, varav det finns en del. Jag håller med om
+               att det är möjligt att klara sig utan else &mdash; genom att ge ett default värde, som man sedan ändrar med enkla if-satser
+               vid behov. Det kan vara en bra strategi om det finns ett tydligt alternativ som är det vanliga, men om alternativen är
+               likvärdiga så behöver det inte vara det bästa.</p>
+
+            <p>Verktyget PHPStan blev till slut nöjt med min kod. Efter några timmars svettande och letande på nätet så lyckade jag passera
+               alla nio nivåer. Det var vid nivå sex som det började dyka upp lite fler anmärkningar, det handlade om typer i arrayer,
+               som man kan ange med hjälp av så kallade DocBlocks. I allmänhet så kunde man lösa de flesta av PHPStans anmärkningar med
+               hjälp av DocBlocks.</p>
+
+            <p>Verktyget PHP Coding Standards Fixer (PHP CS Fixer), som tillhandahålls via Symfony, hittade några fel mest relaterat till
+               placering av klammerparenteser eller "måsvingar". Verktyget är lite omständligt att använda eftersom det endast automatiskt
+               fixar koden, vilket jag inte gillar. Så jag gör så att jag kör en dry-run med verktyget och noterar vilka filer som kommer
+               att ändras, sparar dessa filer i en annan mapp, och kör verktyget igen i skarpt läge. Sedan kan man göra en diff för att se
+               vilka ändringar som gjorts.</p>
+
+            <p>Vad tycker jag om att koda i Symfony så här långt? I förra kursmomentet uttryckte jag en del kritik, och tyckte att det var
+               stort, segt och icke-transparent, mycket händer i bakgrunden men man vet inte vad. Genom att avaktivera debug-toolbaren,
+               som jag provade i detta kursmoment, så blir applikationen lite rappare om mindre "hoppig" i layouten vid navigeringar och
+               omladdningar. En "fara" är att man vänjer sig vid de konstruktioner som Symfony erbjuder, och glömmer bort hur det fungerar
+               i ren PHP utan ramverk. Det blir en "vendor lock-in" effekt.</p>
+
+            <p>TIL:en för kursmomentet får bli arbetet med kodfixningen för att få PHPStan att bli nöjt.</p>
+
+            <p>En sista kommentar om att jag inte nått upp till 20 commits. Jag har i alla fall förbättrat mig jämfört med förra kursmomentet,
+               då jag gjorde 4 commits. Det här kursmomentet tycker jag att jag varit flitig och kommit upp i 8 commits, dvs. 12 stycken
+               totalt. Att committa allt för halvfärdig kod tycker jag inte känns bra. Jag föredrar att ha en tämligen färdig funktion för
+               att committa. Backup till en annan hårddisk gör jag nästan dagligen, så den funktionen är jag inte så beroende av.</p>
 
         </section>
 
