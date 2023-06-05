@@ -28,3 +28,4 @@ yarn-error.log
 
 /tools/
 .php-cs-fixer.cache
+.phpdoc/
