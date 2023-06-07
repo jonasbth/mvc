@@ -2,10 +2,23 @@
 
 namespace App\Card;
 
+/**
+ *  Abstract base class for a playing card.
+ */
 abstract class CardBase
 {
-    protected int $rank;   // 1 - 13
+    /**
+     *  The card rank (1-13).
+     *
+     *  @var int
+     */
+    protected int $rank;
 
+    /**
+     *  Constructor.
+     *
+     *  @param int $rank  The card rank.
+     */
     protected function __construct(int $rank)
     {
         $this->rank = $rank;

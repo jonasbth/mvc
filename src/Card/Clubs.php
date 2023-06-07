@@ -2,8 +2,16 @@
 
 namespace App\Card;
 
+/**
+ *  Concrete class for a suit of Clubs playing card.
+ */
 class Clubs extends CardBase
 {
+    /**
+     *  Constructor.
+     *
+     *  @param int $rank  The card rank.
+     */
     public function __construct(int $rank)
     {
         parent::__construct($rank);
