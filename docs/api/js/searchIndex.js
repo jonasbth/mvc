@@ -111,6 +111,11 @@ Search.appendIndex(
             "summary": "The\u0020position\u0020in\u0020the\u0020deck.",
             "url": "classes/App-Card-CardDeck.html#property_position"
         },                {
+            "fqsen": "\\App\\Card\\CardDeck\u003A\u003A\u0024nOfSuits",
+            "name": "nOfSuits",
+            "summary": "Number\u0020of\u0020used\u0020suits.",
+            "url": "classes/App-Card-CardDeck.html#property_nOfSuits"
+        },                {
             "fqsen": "\\App\\Card\\CardHand",
             "name": "CardHand",
             "summary": "A\u0020playing\u0020card\u0020hand\u0020class.",
@@ -403,13 +408,8 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Game\\Game21",
             "name": "Game21",
-            "summary": "",
+            "summary": "A\u0020class\u0020implementing\u0020the\u0020card\u0020game\u0020\u002221\u0022.",
             "url": "classes/App-Game-Game21.html"
-        },                {
-            "fqsen": "\\App\\Game\\Game21\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/App-Game-Game21.html#method___construct"
         },                {
             "fqsen": "\\App\\Game\\Game21\u003A\u003AcardsLeft\u0028\u0029",
             "name": "cardsLeft",
@@ -418,12 +418,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Game\\Game21\u003A\u003AplayerName\u0028\u0029",
             "name": "playerName",
-            "summary": "Return\u0020player\u0020name.",
+            "summary": "Return\u0020the\u0020player\u0020name.",
             "url": "classes/App-Game-Game21.html#method_playerName"
         },                {
             "fqsen": "\\App\\Game\\Game21\u003A\u003AbankName\u0028\u0029",
             "name": "bankName",
-            "summary": "Return\u0020bank\u0020name.",
+            "summary": "Return\u0020the\u0020bank\u0020name.",
             "url": "classes/App-Game-Game21.html#method_bankName"
         },                {
             "fqsen": "\\App\\Game\\Game21\u003A\u003A\u0024playerHand",
@@ -468,7 +468,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Game\\Game21\u003A\u003A\u0024playerChance",
             "name": "playerChance",
-            "summary": "An\u0020array\u0020of\u0020two\u0020numbers\u0020indicating\u0020the\u0020probability\u0020in\u0020per\u0020cent\u0020that\n\u0020the\u0020player\u00B4s\u0020next\u0020card\u0020won\u00B4t\u0020make\u0020the\u0020hand\u0020worth\u0020more\u0020than\u002021.",
+            "summary": "An\u0020array\u0020of\u0020two\u0020numbers\u0020indicating\u0020the\u0020probability\u0020in\u0020per\u0020cent\u0020that\nthe\u0020player\u00B4s\u0020next\u0020card\u0020won\u00B4t\u0020make\u0020the\u0020hand\u0020worth\u0020more\u0020than\u002021.",
             "url": "classes/App-Game-Game21.html#property_playerChance"
         },                {
             "fqsen": "\\App\\Game\\Game21\u003A\u003AsetPlayerChance\u0028\u0029",
@@ -513,17 +513,17 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Game\\Game21\u003A\u003AbankTurn\u0028\u0029",
             "name": "bankTurn",
-            "summary": "It\u0027s\u0020the\u0020banks\u0020turn\u0020to\u0020play\u0020a\u0020round.",
+            "summary": "It\u0027s\u0020the\u0020bank\u0027s\u0020turn\u0020to\u0020play\u0020a\u0020round.",
             "url": "classes/App-Game-Game21.html#method_bankTurn"
         },                {
             "fqsen": "\\App\\Game\\Game21\u003A\u003AbankPlayChance\u0028\u0029",
             "name": "bankPlayChance",
-            "summary": "Let\u0020the\u0020bank\u0020play\u0020one\u0020round\u0020of\u0020\u002221\u0022,\u0020using\u0020probabilities\u0020of\u0020the\u0020next\u0020drawn\u0020card.",
+            "summary": "Let\u0020the\u0020bank\u0020play\u0020a\u0020round\u0020of\u0020\u002221\u0022,\u0020using\u0020probabilities\u0020of\u0020the\u0020next\u0020drawn\u0020card.",
             "url": "classes/App-Game-Game21.html#method_bankPlayChance"
         },                {
             "fqsen": "\\App\\Game\\Game21\u003A\u003AbankPlay\u0028\u0029",
             "name": "bankPlay",
-            "summary": "Let\u0020the\u0020bank\u0020play\u0020one\u0020round\u0020of\u0020\u002221\u0022.",
+            "summary": "Let\u0020the\u0020bank\u0020play\u0020a\u0020round\u0020of\u0020\u002221\u0022.",
             "url": "classes/App-Game-Game21.html#method_bankPlay"
         },                {
             "fqsen": "\\App\\Game\\Game21\u003A\u003A\u0024deck",
