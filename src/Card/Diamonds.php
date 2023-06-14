@@ -3,14 +3,14 @@
 namespace App\Card;
 
 /**
- *  Concrete class for a suit of Diamonds playing card.
+ * Concrete class for a suit of Diamonds playing card.
  */
 class Diamonds extends CardBase
 {
     /**
-     *  Constructor.
+     * Constructor.
      *
-     *  @param int $rank  The card rank.
+     * @param int $rank  The card rank.
      */
     public function __construct(int $rank)
     {
@@ -18,9 +18,9 @@ class Diamonds extends CardBase
     }
 
     /**
-     *  Return the HTML entity representation of a card.
+     * Return the HTML entity representation of a card.
      *
-     *  @return string  The entity.
+     * @return string  The entity.
      */
     public function getHTMLEntity(): string
     {

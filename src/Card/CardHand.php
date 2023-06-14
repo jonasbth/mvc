@@ -6,33 +6,33 @@ use Countable;
 use Iterator;
 
 /**
- *  A playing card hand class.
+ * A playing card hand class.
  *
- *  @implements Iterator<int, CardBase>
+ * @implements Iterator<int, CardBase>
  */
 class CardHand implements Countable, Iterator
 {
     /**
-     *  A card hand.
+     * A card hand.
      *
-     *  @var array<int, CardBase>
+     * @var array<int, CardBase>
      */
     private array $hand = [];
 
     /**
-     *  The position in the hand.
+     * The position in the hand.
      *
-     *  Used by the Iterator interface
+     * Used by the Iterator interface
      */
     private int $position = 0;
 
     private string $name = "";
 
     /**
-     *  Constructor.
+     * Constructor.
      *
-     *  @param string $name The name of the hand.
-     *  @param array<int, CardBase> $cards  An array of cards.
+     * @param string $name The name of the hand.
+     * @param array<int, CardBase> $cards  An array of cards.
      */
     public function __construct(string $name = "", array $cards = [])
     {
@@ -41,9 +41,9 @@ class CardHand implements Countable, Iterator
     }
 
     /**
-     *  Return the name of the hand.
+     * Return the name of the hand.
      *
-     *  @return string  The name.
+     * @return string  The name.
      */
     public function getName(): string
     {
@@ -51,9 +51,9 @@ class CardHand implements Countable, Iterator
     }
 
     /**
-     *  Add card(s) to hand.
+     * Add card(s) to hand.
      *
-     *  @param array<int, CardBase> $cards  The array of cards to add.
+     * @param array<int, CardBase> $cards  The array of cards to add.
      */
     public function addCards(array $cards): void
     {
@@ -61,7 +61,7 @@ class CardHand implements Countable, Iterator
     }
 
     /**
-     *  Remove all cards from hand.
+     * Remove all cards from hand.
      */
     public function reset(): void
     {
@@ -70,11 +70,11 @@ class CardHand implements Countable, Iterator
     }
 
     /**
-     *  Return the total points of the hand according to the rules of "21".
+     * Return the total points of the hand according to the rules of "21".
      *
-     *  For totals less than 21, up to two values can be returned as an ace can be worth 1 or 14.
+     * For totals less than 21, up to two values can be returned as an ace can be worth 1 or 14.
      *
-     *  @return array<int, int>  The points array.
+     * @return array<int, int>  The points array.
      */
     public function getPoints21(): array
     {
@@ -104,12 +104,12 @@ class CardHand implements Countable, Iterator
     }
 
     /**
-     *  Return the total maximum points of the hand according to the rules of "21".
+     * Return the total maximum points of the hand according to the rules of "21".
      *
-     *  For totals up to 21, there can be up to two valid values of the hand.
-     *  Return the highest of these.
+     * For totals up to 21, there can be up to two valid values of the hand.
+     * Return the highest of these.
      *
-     *  @return int   The max points.
+     * @return int   The max points.
      */
     public function getMaxPoints21(): int
     {
@@ -119,11 +119,11 @@ class CardHand implements Countable, Iterator
     }
 
     /**
-     *  Return number of cards in the hand.
+     * Return number of cards in the hand.
      *
-     *  Required method of the Countable interface.
+     * Required method of the Countable interface.
      *
-     *  @return int  Number of cards.
+     * @return int  Number of cards.
      */
     public function count(): int
     {
@@ -131,9 +131,9 @@ class CardHand implements Countable, Iterator
     }
 
     /**
-     *  Reset the position.
+     * Reset the position.
      *
-     *  Required method of the Iterator interface.
+     * Required method of the Iterator interface.
      */
     public function rewind(): void
     {
@@ -141,11 +141,11 @@ class CardHand implements Countable, Iterator
     }
 
     /**
-     *  Return the current card.
+     * Return the current card.
      *
-     *  Required method of the Iterator interface.
+     * Required method of the Iterator interface.
      *
-     *  @return CardBase  A card.
+     * @return CardBase  A card.
      */
     public function current(): CardBase
     {
@@ -153,11 +153,11 @@ class CardHand implements Countable, Iterator
     }
 
     /**
-     *  Return the position in the hand.
+     * Return the position in the hand.
      *
-     *  Required method of the Iterator interface.
+     * Required method of the Iterator interface.
      *
-     *  @return int  The position.
+     * @return int  The position.
      */
     public function key(): int
     {
@@ -165,9 +165,9 @@ class CardHand implements Countable, Iterator
     }
 
     /**
-     *  Advance the position in the hand.
+     * Advance the position in the hand.
      *
-     *  Required method of the Iterator interface.
+     * Required method of the Iterator interface.
      */
     public function next(): void
     {
@@ -175,11 +175,11 @@ class CardHand implements Countable, Iterator
     }
 
     /**
-     *  Return whether the position is valid.
+     * Return whether the position is valid.
      *
-     *  Required method of the Iterator interface.
+     * Required method of the Iterator interface.
      *
-     *  @return bool  true or false.
+     * @return bool  true or false.
      */
     public function valid(): bool
     {

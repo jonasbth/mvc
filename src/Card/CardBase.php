@@ -3,21 +3,21 @@
 namespace App\Card;
 
 /**
- *  Abstract base class for a playing card.
+ * Abstract base class for a playing card.
  */
 abstract class CardBase
 {
     /**
-     *  The card rank (1-13).
+     * The card rank (1-13).
      *
-     *  @var int
+     * @var int
      */
     protected int $rank;
 
     /**
-     *  Constructor.
+     * Constructor.
      *
-     *  @param int $rank  The card rank.
+     * @param int $rank  The card rank.
      */
     protected function __construct(int $rank)
     {
@@ -25,16 +25,16 @@ abstract class CardBase
     }
 
     /**
-     *  Return the HTML entity representation of a card.
+     * Return the HTML entity representation of a card.
      *
-     *  @return string  The entity.
+     * @return string  The entity.
      */
     abstract public function getHTMLEntity(): string;
 
     /**
-     *  Return the rank of the card.
+     * Return the rank of the card.
      *
-     *  @return int  The rank.
+     * @return int  The rank.
      */
     public function getRank(): int
     {
@@ -42,9 +42,9 @@ abstract class CardBase
     }
 
     /**
-     *  Return the last hexadecimal character of the Unicode representation of a card.
+     * Return the last hexadecimal character of the Unicode representation of a card.
      *
-     *  @return string  The hex char.
+     * @return string  The hex char.
      */
     protected function getLastHexCharUnicode(): string
     {
@@ -52,9 +52,9 @@ abstract class CardBase
     }
 
     /**
-     *  Return the suit of the card, which is derived from the class name.
+     * Return the suit of the card, which is derived from the class name.
      *
-     *  @return string  The suit.
+     * @return string  The suit.
      */
     public function getSuit(): string
     {
