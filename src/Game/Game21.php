@@ -5,6 +5,9 @@ namespace App\Game;
 use App\Card\CardDeck;
 use App\Card\CardHand;
 
+/**
+ * A class implementing the card game "21".
+ */
 class Game21
 {
     private CardDeck $deck;
@@ -16,42 +19,46 @@ class Game21
     private bool $playersTurn;
 
     /**
-     *  An array of two numbers indicating the probability in per cent that
-     *  the player´s next card won´t make the hand worth more than 21.
+     * An array of two numbers indicating the probability in per cent that
+     * the player´s next card won´t make the hand worth more than 21.
      *
-     *  If there is only one valid probability, -1 is given for index position 1.
+     * If there is only one valid probability, -1 is given for index position 1.
      *
-     *  @var array<int, int>
+     * @var array<int, int>
      */
     private array $playerChance;
 
     /**
-     *  An int array [0..13] of number of cards of each rank.
+     * An int array [0..13] of number of cards of each rank.
      *
-     *  Keep total card count in array position 0.
+     * Keep total card count in array position 0.
      *
-     *  @var array<int, int>
+     * @var array<int, int>
      */
     private array $cardCount;
 
     /**
-     *  Show the chance to the user or not.
+     * Show the chance to the user or not.
      */
     private bool $playerUseChance;
 
     /**
-     *  Let the bank use the chance or not.
+     * Let the bank use the chance or not.
      */
     private bool $bankUseChance;
 
+    /**
+     * The empty constructor.
+     *
     public function __construct()
     {
     }
+    */
 
     /**
-     *  Return number of cards left.
+     * Return number of cards left.
      *
-     *  @return int  Number of cards.
+     * @return int  Number of cards.
      */
     public function cardsLeft(): int
     {
@@ -59,9 +66,9 @@ class Game21
     }
 
     /**
-     *  Return player name.
+     * Return the player name.
      *
-     *  @return string  The name.
+     * @return string  The name.
      */
     public function playerName(): string
     {
@@ -69,9 +76,9 @@ class Game21
     }
 
     /**
-     *  Return bank name.
+     * Return the bank name.
      *
-     *  @return string  The name.
+     * @return string  The name.
      */
     public function bankName(): string
     {
@@ -79,9 +86,9 @@ class Game21
     }
 
     /**
-     *  Return player hand.
+     * Return the player hand.
      *
-     *  @return CardHand  The hand.
+     * @return CardHand  The hand.
      */
     public function playerHand(): CardHand
     {
@@ -89,9 +96,9 @@ class Game21
     }
 
     /**
-     *  Return bank hand.
+     * Return the bank hand.
      *
-     *  @return CardHand  The hand.
+     * @return CardHand  The hand.
      */
     public function bankHand(): CardHand
     {
@@ -99,9 +106,9 @@ class Game21
     }
 
     /**
-     *  Return the round.
+     * Return the round.
      *
-     *  @return int  The round.
+     * @return int  The round.
      */
     public function round(): int
     {
@@ -109,9 +116,9 @@ class Game21
     }
 
     /**
-     *  Return number of player wins.
+     * Return number of player wins.
      *
-     *  @return int  The number.
+     * @return int  The number.
      */
     public function playerWins(): int
     {
@@ -119,9 +126,9 @@ class Game21
     }
 
     /**
-     *  Return number of bank wins.
+     * Return number of bank wins.
      *
-     *  @return int  The number.
+     * @return int  The number.
      */
     public function bankWins(): int
     {
@@ -129,9 +136,9 @@ class Game21
     }
 
     /**
-     *  Return whether it is the player´s turn.
+     * Return whether it is the player´s turn.
      *
-     *  @return bool  true if it is the player's turn.
+     * @return bool  true if it is the player's turn.
      */
     public function playersTurn(): bool
     {
@@ -139,9 +146,9 @@ class Game21
     }
 
     /**
-     *  Return whether the player can use computed chance.
+     * Return whether the player can use computed chance.
      *
-     *  @return bool  true if the player can use chance.
+     * @return bool  true if the player can use chance.
      */
     public function playerUseChance(): bool
     {
@@ -149,9 +156,9 @@ class Game21
     }
 
     /**
-     *  Return whether the bank can use computed chance.
+     * Return whether the bank can use computed chance.
      *
-     *  @return bool  true if the bank can use chance.
+     * @return bool  true if the bank can use chance.
      */
     public function bankUseChance(): bool
     {
@@ -159,12 +166,12 @@ class Game21
     }
 
     /**
-     *  Return an array indicating the chance of success for the player´s next draw.
+     * Return an array indicating the chance of success for the player´s next draw.
      *
-     *  Two percentages are returned if there is an ace counting as 14, which does not
-     *  contribute to a hand above 21, otherwise -1 is returned for index position 1.
+     * Two percentages are returned if there is an ace counting as 14, which does not
+     * contribute to a hand above 21, otherwise -1 is returned for index position 1.
      *
-     *  @return array<int, int>  The percentage array.
+     * @return array<int, int>  The percentage array.
      */
     public function playerChance(): array
     {
@@ -172,8 +179,7 @@ class Game21
     }
 
     /**
-     *  Calculate and set the $playerChance array based on the current hand of the player.
-     *
+     * Calculate and set the $playerChance array based on the current hand of the player.
      */
     private function setPlayerChance(): void
     {
@@ -189,11 +195,11 @@ class Game21
     }
 
     /**
-     *  Return an array of number of cards left of each rank.
+     * Return an array of number of cards left of each rank.
      *
-     *  The total card count is in array position 0.
+     * The total card count is in array position 0.
      *
-     *  @return array<int, int>  The count array.
+     * @return array<int, int>  The count array.
      */
     public function cardCount(): array
     {
@@ -201,9 +207,9 @@ class Game21
     }
 
     /**
-     *  Return a string describing the value of the player's hand.
+     * Return a string describing the value of the player's hand.
      *
-     *  @return string  The description.
+     * @return string  The description.
      */
     public function playerWorth(): string
     {
@@ -217,15 +223,16 @@ class Game21
     }
 
     /**
-     *  Draw cards off the deck.
+     * Draw cards off the deck.
      *
-     *  @param int $numCards  Number of cards to draw.
+     * @param int $numCards  Number of cards to draw.
+     * @param array<int, int> $ranks  Ranks of the cards to draw. Used for test.
      *
-     *  @return array<int, \App\Card\CardBase>  An array of cards.
+     * @return array<int, \App\Card\CardBase> An array of cards.
      */
-    private function drawCards(int $numCards = 1): array
+    private function drawCards(int $numCards = 1, array $ranks = []): array
     {
-        $cards = $this->deck->draw($numCards);
+        $cards = $this->deck->draw($numCards, ...$ranks);
 
         foreach ($cards as $card) {
             $this->cardCount[$card->getRank()]--;
@@ -236,11 +243,11 @@ class Game21
     }
 
     /**
-     *  Calculate the probability of success for drawing a card off the current deck.
+     * Calculate the probability of success for drawing a card off the current deck.
      *
-     *  @param int $handWorth  The worth of the hand.
+     * @param int $handWorth  The worth of the hand.
      *
-     *  @return int  The probability of success in per cent.
+     * @return int  The probability of success in per cent.
      */
     private function calcSuccessFactor(int $handWorth): int
     {
@@ -262,11 +269,17 @@ class Game21
     }
 
     /**
-     *  Initiate a new game of "21".
+     * Initiate a new game of "21".
      *
-     *  @param string $playerName  The player´s name.
+     * @param string $playerName  The player´s name.
+     * @param bool $playerChance  Whether the player is shown probability
+     *                            of success for the next draw.
+     * @param bool $bankChance  Whether the bank can use probability of success.
+     * @param int  $playerRank  The rank of the player's first card. Used for test.
+     * @param int  $nOfSuits    Number of used suits. Used in test to create a smaller deck.
      */
-    public function newGame(string $playerName, bool $playerChance, bool $bankChance): void
+    public function newGame(string $playerName, bool $playerChance, bool $bankChance,
+                            int $playerRank = 0, int $nOfSuits = 4): void
     {
         $this->round = 1;
         $this->playerWins = 0;
@@ -275,36 +288,38 @@ class Game21
         $this->playerUseChance = $playerChance;
         $this->bankUseChance = $bankChance;
 
-        $this->deck = new CardDeck();
+        $this->deck = new CardDeck($nOfSuits);
         $this->deck->shuffle(2);
-        $this->cardCount = array_fill(0, 14, 4);
-        $this->cardCount[0] = 52;
+        $this->cardCount = array_fill(0, 14, $nOfSuits);
+        $this->cardCount[0] = $nOfSuits * 13;
 
-        $this->playerHand = new CardHand($playerName, $this->drawCards(1));
+        $this->playerHand = new CardHand($playerName, $this->drawCards(1, [$playerRank]));
         $this->setPlayerChance();
         $this->bankHand = new CardHand("Banken");
     }
 
     /**
-     *  Initiate a new round.
+     * Initiate a new round.
      *
+     * @param int $playerRank  The rank of the player's first card. Used for test.
      */
-    public function nextRound(): void
+    public function nextRound(int $playerRank = 0): void
     {
         $this->round++;
         $this->playerHand->reset();
-        $this->playerHand->addCards($this->drawCards(1));
+        $this->playerHand->addCards($this->drawCards(1, [$playerRank]));
         $this->setPlayerChance();
         $this->playersTurn = true;
     }
 
     /**
-     *  Let the player draw one card.
+     * Let the player draw one card.
      *
+     * @param int $playerRank  The rank of the player's card. Used for test.
      */
-    public function playerNewCard(): void
+    public function playerNewCard(int $playerRank = 0): void
     {
-        $this->playerHand->addCards($this->drawCards(1));
+        $this->playerHand->addCards($this->drawCards(1, [$playerRank]));
         $points = $this->playerHand->getPoints21();
 
         if ($points[0] > 21) {
@@ -315,17 +330,18 @@ class Game21
     }
 
     /**
-     *  It's the banks turn to play a round.
+     * It's the bank's turn to play a round.
      *
+     * @param array<int, int> $ranks  Ranks of the cards to draw. Used for test.
      */
-    public function bankTurn(): void
+    public function bankTurn(array $ranks = []): void
     {
         $this->playersTurn = false;
 
         if ($this->bankUseChance) {
-            $this->bankPlayChance();
+            $this->bankPlayChance($ranks);
         } else {
-            $this->bankPlay();
+            $this->bankPlay($ranks);
         }
 
         $bankPoints = $this->bankHand->getMaxPoints21();
@@ -338,15 +354,16 @@ class Game21
     }
 
     /**
-     *  Let the bank play one round of "21", using probabilities of the next drawn card.
+     * Let the bank play a round of "21", using probabilities of the next drawn card.
      *
+     * @param array<int, int> $ranks  Ranks of the cards to draw. Used for test.
      */
-    private function bankPlayChance(): void
+    private function bankPlayChance(array $ranks = []): void
     {
         $this->bankHand->reset();
 
         do {
-            $this->bankHand->addCards($this->drawCards(1));
+            $this->bankHand->addCards($this->drawCards(1, array_splice($ranks, 0, 1)));
             $points = $this->bankHand->getPoints21();
 
             if (count($points) === 1) {
@@ -361,17 +378,18 @@ class Game21
     }
 
     /**
-     *  Let the bank play one round of "21".
+     * Let the bank play a round of "21".
      *
+     * @param array<int, int> $ranks  Ranks of the cards to draw. Used for test.
      */
-    private function bankPlay(): void
+    private function bankPlay(array $ranks = []): void
     {
         $this->bankHand->reset();
-        $this->bankHand->addCards($this->drawCards(2));
+        $this->bankHand->addCards($this->drawCards(2, array_splice($ranks, 0, 2)));
         $maxPoints = $this->bankHand->getMaxPoints21();
 
         while ($maxPoints < 17 && $this->cardsLeft() > 0) {
-            $this->bankHand->addCards($this->drawCards(1));
+            $this->bankHand->addCards($this->drawCards(1, array_splice($ranks, 0, 1)));
             $maxPoints = $this->bankHand->getMaxPoints21();
         }
     }
