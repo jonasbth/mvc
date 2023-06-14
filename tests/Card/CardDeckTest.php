@@ -39,6 +39,25 @@ class CardDeckTest extends TestCase
     }
 
     /**
+     * Test draw cards of specific rank.
+     */
+    public function testDrawCardsRank()
+    {
+        $callback = fn(CardBase $card): int => $card->getRank();
+        $this->deck->shuffle();
+
+        $cardArr = $this->deck->draw(1, 1);
+        $this->assertEquals([1], array_map($callback, $cardArr));
+
+        $cardArr = $this->deck->draw(2, 1, 2);
+        $this->assertEquals([1, 2], array_map($callback, $cardArr));
+
+        // There are only two aces left, so only those are returned
+        $cardArr = $this->deck->draw(3, 1, 1, 1);
+        $this->assertEquals([1, 1], array_map($callback, $cardArr));
+    }
+
+    /**
      * Test count() method.
      */
     public function testCount()
