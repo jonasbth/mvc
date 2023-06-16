@@ -278,9 +278,13 @@ class Game21
      * @param int  $playerRank  The rank of the player's first card. Used for test.
      * @param int  $nOfSuits    Number of used suits. Used in test to create a smaller deck.
      */
-    public function newGame(string $playerName, bool $playerChance, bool $bankChance,
-                            int $playerRank = 0, int $nOfSuits = 4): void
-    {
+    public function newGame(
+        string $playerName,
+        bool $playerChance,
+        bool $bankChance,
+        int $playerRank = 0,
+        int $nOfSuits = 4
+    ): void {
         $this->round = 1;
         $this->playerWins = 0;
         $this->bankWins = 0;

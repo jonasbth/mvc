@@ -22,7 +22,7 @@ class Game21Test extends TestCase
     /**
      * Test initiate a new game and get some basic properties.
      */
-    public function testNewGame()
+    public function testNewGame(): void
     {
         // Let the player's name be "Test" and let the player and the bank use chance.
         self::$game->newGame("Test", true, true);
@@ -56,7 +56,7 @@ class Game21Test extends TestCase
     /**
      * Test let the player play an initial round.
      */
-    public function testPlayerRound()
+    public function testPlayerRound(): void
     {
         // The player draws an initial ace
         self::$game->newGame("Test", true, true, 1);
@@ -86,7 +86,7 @@ class Game21Test extends TestCase
     /**
      * Test let the player lose an initial round, and a new round is initiated.
      */
-    public function testInitRound()
+    public function testInitRound(): void
     {
         // The player draws an initial knight
         self::$game->newGame("Test", true, true, 11);
@@ -107,7 +107,7 @@ class Game21Test extends TestCase
     /**
      * Test let the bank win an initial round, not using chance.
      */
-    public function testBankWinNoChance()
+    public function testBankWinNoChance(): void
     {
         // The player draws an initial knight
         self::$game->newGame("Test", false, false, 11);
@@ -126,7 +126,7 @@ class Game21Test extends TestCase
     /**
      * Test let the bank lose an initial round, not using chance.
      */
-    public function testBankLoseNoChance()
+    public function testBankLoseNoChance(): void
     {
         // The player draws an initial seven
         self::$game->newGame("Test", false, false, 7);
@@ -145,7 +145,7 @@ class Game21Test extends TestCase
     /**
      * Test let the bank win an initial round, using chance.
      */
-    public function testBankWinChance()
+    public function testBankWinChance(): void
     {
         // The player draws an initial king
         self::$game->newGame("Test", false, true, 13);
@@ -165,7 +165,7 @@ class Game21Test extends TestCase
      * Test that there is no crash when the card deck becomes empty (the drawn hands become empty).
      * Use a "smarter" bank and a smaller card deck with 13 cards (1 suit) to facilitate testing.
      */
-    public function testBankChanceNoCrashEmptyDeck()
+    public function testBankChanceNoCrashEmptyDeck(): void
     {
         // Let the player and the bank use chance, let the player draw an initial king,
         // and use just one suit.
@@ -233,7 +233,7 @@ class Game21Test extends TestCase
      * A similar test as above with a smaller card deck (1 suit), but don´t let the bank use
      * probabilities, which lets the player win a few more rounds.
      */
-    public function testBankNoChanceNoCrashEmptyDeck()
+    public function testBankNoChanceNoCrashEmptyDeck(): void
     {
         // Let the player use chance, but the bank not (the player chance is not used in the test).
         // Let the player draw an initial king, and use just one suit.

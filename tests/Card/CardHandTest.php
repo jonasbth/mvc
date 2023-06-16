@@ -31,7 +31,7 @@ class CardHandTest extends TestCase
     /**
      * Test getName() method.
      */
-    public function testGetName()
+    public function testGetName(): void
     {
         $this->assertEquals("Test", $this->hand->getName());
     }
@@ -39,7 +39,7 @@ class CardHandTest extends TestCase
     /**
      * Test addCards() method.
      */
-    public function testAddCards()
+    public function testAddCards(): void
     {
         $this->hand->addCards([new Clubs(4)]);
         $newHand = [];
@@ -56,7 +56,7 @@ class CardHandTest extends TestCase
     /**
      * Test reset() method.
      */
-    public function testReset()
+    public function testReset(): void
     {
         $this->hand->reset();
         $this->assertEquals(0, $this->hand->count());
@@ -65,7 +65,7 @@ class CardHandTest extends TestCase
     /**
      * Test count() method.
      */
-    public function testCount()
+    public function testCount(): void
     {
         $count = $this->hand->count();
 
@@ -75,7 +75,7 @@ class CardHandTest extends TestCase
     /**
      * Test getPoints21() method, used in the gard game "21".
      */
-    public function testGetPoints21()
+    public function testGetPoints21(): void
     {
         // Test two cards, no ace, points < 21.
         $points = $this->hand->getPoints21();
@@ -110,7 +110,7 @@ class CardHandTest extends TestCase
     /**
      * Test getMaxPoints21() method, used in the gard game "21".
      */
-    public function testGetMaxPoints21()
+    public function testGetMaxPoints21(): void
     {
         // Test two cards, no ace, points < 21.
         $points = $this->hand->getMaxPoints21();
@@ -125,7 +125,7 @@ class CardHandTest extends TestCase
     /**
      * Test methods of the Iterator interface.
      */
-    public function testIteratorInterface()
+    public function testIteratorInterface(): void
     {
         $this->assertEquals(0, $this->hand->key());
         $this->assertInstanceOf("\App\Card\CardBase", $this->hand->current());

@@ -30,7 +30,7 @@ class CardDeckTest extends TestCase
     /**
      * Test draw a card.
      */
-    public function testDrawCard()
+    public function testDrawCard(): void
     {
         $cardArr = $this->deck->draw();
 
@@ -41,7 +41,7 @@ class CardDeckTest extends TestCase
     /**
      * Test draw cards of specific rank.
      */
-    public function testDrawCardsRank()
+    public function testDrawCardsRank(): void
     {
         $callback = fn(CardBase $card): int => $card->getRank();
         $this->deck->shuffle();
@@ -60,7 +60,7 @@ class CardDeckTest extends TestCase
     /**
      * Test count() method.
      */
-    public function testCount()
+    public function testCount(): void
     {
         $count = $this->deck->count();
 
@@ -70,7 +70,7 @@ class CardDeckTest extends TestCase
     /**
      * Test that shuffle() method preserves a complete card deck.
      */
-    public function testShuffle()
+    public function testShuffle(): void
     {
         $this->deck->shuffle();
 
@@ -96,7 +96,7 @@ class CardDeckTest extends TestCase
     /**
      * Test methods of the Iterator interface.
      */
-    public function testIteratorInterface()
+    public function testIteratorInterface(): void
     {
         $this->assertEquals(0, $this->deck->key());
         $this->assertInstanceOf("\App\Card\CardBase", $this->deck->current());

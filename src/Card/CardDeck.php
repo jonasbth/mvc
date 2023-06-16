@@ -107,8 +107,9 @@ class CardDeck implements Countable, Iterator
      */
     public function draw(int $num = 1, int ...$ranks): array
     {
-        if (empty($ranks) || !$ranks[0])
+        if (empty($ranks) || !$ranks[0]) {
             return array_splice($this->deck, -$num);
+        }
 
         $cards = [];
 

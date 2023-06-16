@@ -32,7 +32,7 @@ class DiamondsTest extends TestCase
     /**
      * Test construct object and verify class name.
      */
-    public function testCreateObject()
+    public function testCreateObject(): void
     {
         $this->assertInstanceOf("\App\Card\Diamonds", $this->card);
     }
@@ -40,7 +40,7 @@ class DiamondsTest extends TestCase
     /**
      * Test getRank() method.
      */
-    public function testGetRank()
+    public function testGetRank(): void
     {
         $res = $this->card->getRank();
 
@@ -50,7 +50,7 @@ class DiamondsTest extends TestCase
     /**
      * Test getSuit() method.
      */
-    public function testGetSuit()
+    public function testGetSuit(): void
     {
         $res = $this->card->getSuit();
 
@@ -60,7 +60,7 @@ class DiamondsTest extends TestCase
     /**
      * Test getHTMLEntity() method.
      */
-    public function testGetHTMLEntity()
+    public function testGetHTMLEntity(): void
     {
         $res = $this->card->getHTMLEntity();
         $exp = "&#x1f0c" .
