@@ -196,11 +196,55 @@
 
         <section>
             <h2 id="kmom04">Kmom04</h2>
-            <p></p>
+            <p>I detta kursmoment provar vi på enhetstestning med PHPUnit och dokumentation med phpDoc. Enhetstester skrivs ofta av den som
+               utvecklat koden, och kan därför anpassas för att testa så många delar av koden och specialfall som möjligt. Vi strävar efter hög
+               kodtäckning. Men kodtäckning i sig är inte ett fullständigt mått på om koden är bra testad, det gäller också att skriva relevanta
+               testfall, och att ha genomtänkta så kallade asserts, så att all avsedd funktionalitet verkligen testas.</p>
 
-            <p></p>
+            <p>Det gick tämligen smärtfritt att komma igång att skriva testfall med PHPUnit. Man skapar en katalogstruktur för testklasserna som
+               efterliknar den för koden som skall testas, med minst en testklass per källkodsklass. Sedan låter man testklasserna ärva ifrån
+               basklassen <code>TestCase</code>, så att man får tillgång till alla faciliteter i PHPUnit, t ex alla asserts.</p>
 
-            <p></p>
+            <p>Jag använde mig av så kallade fixtures i testerna för att köra lite gemensam kod för alla tester i en klass, genom att använda
+               metoderna <code>setUp()</code> och <code>tearDown()</code>. På så sätt sparar man några rader kod. För testen av <code>Game21</code>-
+               klassen använde jag mig istället av en delad fixture för alla tester, genom att använda metoden <code>setUpBeforeClass()</code>.
+               Det enda jag gör i den metoden är att instantiera <code>Game21</code>, som bara har en default konstruktor, så det är inte
+               jättemycket vunnet i rader kod med det, men det kanske sparar några CPU-cykler?</p>
+
+            <p>Det var lite utmanande att försöka nå 100% kodtäckning i testerna. Relativt enkelt var det i kortklasserna och klasserna för en kortlek
+               och en korthand. Mest utmanande var det i spelklassen <code>Game21</code>. Till exempel har jag på ett ställe i koden ett villkor
+               som kollar om det finns några kort kvar i kortleken, och eftersom kortleken från början har 52 kort, så måste man spela ett flertal
+               rundor för att kunna testa det villkoret. För att underlätta det testet, och också för att lättare kunna testa andra aspekter av
+               spelet när det är få kort kvar, så införde jag en möjlighet att skapa en kortlek med färre antal sviter än normalfallet med fyra.
+               Till exempel kan man skapa en kortlek med en svit, t ex spader, på endast 13 kort. Då går det enklare att testa själva
+               "slutspelet" av spelet.</p>
+
+            <p>Ett annat problem vid testerna är att kortleken är slumpmässigt sorterad, vilket gör det svårt att testa alla möjliga poängsituationer
+               som kan uppstå, till exempel om man drar ett ess, så kan det vara värt ett eller fjorton. Så för att mera precist kunna testa
+               olika korthänder, så lade jag till en möjlighet i <code>draw()</code>-metoden i <code>CardDeck</code>-klassen att välja vilken
+               valör av korten man önskar dra från kortleken. Finns inte den önskade valören kvar i kortleken, så dras inget kort i dess ställe,
+               så man måste ha lite koll på de dragna korten när man skriver testerna. Jag tycker att jag fick det att fungera bra, och det
+               underlättade att testa alla specialfall, så jag nådde 100% kodtäckning i <code>Game21</code>-klassen.</p>
+
+            <p>En plump i kodtäckningsrapporten är att tester saknas för kontrollklasserna. Jag såg i dokumentationen för Symfony att man kan
+               göra så kallade <a href="https://symfony.com/doc/current/testing.html#application-tests">applikationstester</a> för att testa
+               requester och responser, men det kändes som en lite för stor uppgift att ge sig i kast med.</p>
+
+            <p>En fråga vi skulle fundera över är om den egna koden är testbar, och även om testbar kod innebär snygg och ren kod. Det är lite
+               svårt att bedöma den egna koden, men med de tillägg jag gjorde enligt beskrivningen ovan, så lyckades jag testa koden hyfsat bra.
+               Sen är det svårt att avgöra om testbar kod på något sätt innebär snygg kod, kanske inte nödvändigtvis, men det underlättar.
+               I begreppet snygg kod skulle man också kunna innefatta effektivt kod, som går snabbt att exekvera och som är snål vad gäller
+               minneskrav. Även kod som utnyttjar programmeringsspråkets möjligheter och resulterar i lite källkod tycker jag man
+               kan kalla för snygg, men det gäller att hitta en lagom nivå, så att koden inte blir svårtydd.</p>
+
+            <p>En specifik TIL för kursmomentet var att jag kom på att man i de så kallade docblocken bara får ha ett mellanslag mellan
+               * och @param- och @return-taggarna, annars parsas inte taggarna av phpDoc. Jag hade inledningsvis två mellanslag efter *,
+               för att jag tyckte det gav ett luftigare intryck, men det är alltså ingen bra idé.</p>
+
+            <p>En annan sak jag provade i kursmomentet var en grafisk klient till Git kallad <a href="https://github.com/git-cola/git-cola">
+               Git Cola</a>, vilken fungerade mycket bra till min Ubuntu desktop. Den gav en bra överblick över ändrade filer och vad som
+               ändrats i filerna, och det gjorde det enkelt att välja ut filer att commit:a. Så i det här kursmomentet närmar jag mig tio
+               commits, även om jag säkert fortfarande ligger hopplöst efter rekommenderat antal.</p>
 
         </section>
 
